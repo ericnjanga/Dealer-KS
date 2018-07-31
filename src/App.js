@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AdminContext, auth, provider } from './services/services-init.js';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import logo from './logo.svg';
 import 'typeface-roboto';
@@ -123,29 +126,33 @@ class App extends Component {
     return (
       <React.Fragment>
         <CssBaseline />
-        <div className="App">
-          <AuthPortal />
-          <AppDrawer {...this.state} toggleDrawer={this.toggleDrawer} />
-          <MenuAppBar toggleDrawer={this.toggleDrawer} />
-          <Hero />
-          <MainCarousel />
-          {/* <Carousel title={'Les Affaires de la semaine'}>
-            
-              <div>*************</div>
-              <div>*************</div>
-              <div>*************</div>
-              <div>*************</div>
-              <div>*************</div>
-              <div>*************</div>
-              <div>*************</div>
-              <div>*************</div>
-           
-          </Carousel> */}
-          {/* <DealsOfTheWeek /> */}
-          <ContactCTA />
-          <CarsListTing classes={CarsListTingStyles} />
-          <Footer />
-        </div>
+        <AdminContext.Provider value={'fefew'}>
+          <Router>
+            <div className="App">
+              <AuthPortal />
+              <AppDrawer {...this.state} toggleDrawer={this.toggleDrawer} />
+              <MenuAppBar toggleDrawer={this.toggleDrawer} />
+              <Hero />
+              <MainCarousel />
+              {/* <Carousel title={'Les Affaires de la semaine'}>
+                
+                  <div>*************</div>
+                  <div>*************</div>
+                  <div>*************</div>
+                  <div>*************</div>
+                  <div>*************</div>
+                  <div>*************</div>
+                  <div>*************</div>
+                  <div>*************</div>
+              
+              </Carousel> */}
+              {/* <DealsOfTheWeek /> */}
+              <ContactCTA />
+              <CarsListTing classes={CarsListTingStyles} />
+              <Footer />
+            </div>
+          </Router>
+        </AdminContext.Provider>
       </React.Fragment>
     );
   }

@@ -5,16 +5,9 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import Icon from '@material-ui/icons/Lock';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { format } from 'util';
-// import './AuthPortalPresentation.css';
+// import './AdminPortalPresentation.css';
 
-const AuthPortalPresentation = ({
+const AdminPortalPresentation = ({
   id,
   name,
   email,
@@ -23,15 +16,6 @@ const AuthPortalPresentation = ({
 
   handleChange,
   handleSubmit,
-
-  handleDialogClickOpen,
-  handleDialogClose,
-
-  adminName,
-  adminPassword,
-  handleAdminChange,
-
-  dialogOpen,
 
   classes,
   style
@@ -107,100 +91,17 @@ const AuthPortalPresentation = ({
             </Button>
           </div>
         </form>
-
-
-        <Button
-          variant="fab"
-          mini 
-          aria-label="Add"
-          className={classes.button}
-          onClick={handleDialogClickOpen}
-          style={{ position:'absolute', right:'10px', bottom:'10px' }}
-        >
-          <Icon />
-        </Button>
       </Paper>
-      
-      <AdminDialog
-        handleDialogClose={handleDialogClose}
-        dialogOpen={dialogOpen}
-        adminName={adminName}
-        adminPassword={adminPassword}
-        handleAdminChange={handleAdminChange}
-      />
+      ????
     </section>
   );
 
 };
 
-
-const AdminDialog = ({
-  handleDialogClose,
-  handleAdminChange,
-  dialogOpen,
-  adminName,
-  adminPassword,
-}) => {
-  return (
-    <div>
-      <Dialog
-        open={dialogOpen}
-        onClose={handleDialogClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Connection Administrateur"}
-          <Icon />
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-
-
-
-            <form
-              noValidate
-              autoComplete="off"
-              style={{ marginBottom: '20px' }}
-            >
-              <TextField
-                id="adminName"
-                label="Name"
-                name="adminName"
-                value={adminName}
-                onChange={handleAdminChange}
-                margin="normal"
-              />
-              <TextField
-                id="adminPassword"
-                label="Password"
-                name="adminPassword"
-                value={adminPassword}
-                onChange={handleAdminChange}
-                margin="normal"
-              />
-            </form>
-
-
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={handleDialogClose} color="primary" autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
-}
-
 /**
  * Component props validation
  */
-AuthPortalPresentation.propTypes = {
+AdminPortalPresentation.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
@@ -214,7 +115,7 @@ AuthPortalPresentation.propTypes = {
 /**
  * Component props default values
  */
-AuthPortalPresentation.defaultProps = {
+AdminPortalPresentation.defaultProps = {
   id: null,
   style: { // Default styles
     container: {
@@ -233,7 +134,6 @@ AuthPortalPresentation.defaultProps = {
 
 const styles = theme => ({
   root: {
-    position: 'relative',
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 4,
     paddingBottom: theme.spacing.unit * 4,
@@ -246,4 +146,4 @@ const styles = theme => ({
   },
 });
 
-export default withStyles(styles)(AuthPortalPresentation); 
+export default withStyles(styles)(AdminPortalPresentation); 

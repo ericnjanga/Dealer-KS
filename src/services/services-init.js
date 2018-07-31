@@ -14,6 +14,6 @@ export const auth = firebase.auth(); // auth
 export const storage = firebase.storage(); // images and ...
 
 
-// export const UserContext = React.createContext({}); // User Context
+export const AdminContext = React.createContext({}); // Admin Context
 
 export default database;

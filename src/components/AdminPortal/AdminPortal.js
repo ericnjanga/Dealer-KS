@@ -1,21 +1,18 @@
 import React from 'react';
-import AuthPortalPresentation from './AuthPortalPresentation.js';
+import AdminPortalPresentation from './AdminPortalPresentation.js';
 import DBUser from './../../services/DBUser.class.js';
 
-class AuthPortal extends React.Component {
+class AdminPortal extends React.Component {
 
   constructor(props) {
 
     super(props);
     this.state = {
       active: true, // component visibility
-      dialogOpen: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDialogClickOpen = this.handleDialogClickOpen.bind(this);
-    this.handleDialogClose = this.handleDialogClose.bind(this);
 
   }
 
@@ -34,13 +31,7 @@ class AuthPortal extends React.Component {
       country: localStorage.getItem('ks-user-country') ? localStorage.getItem('ks-user-country') : '',
     };
 
-    const admin = {
-      id: localStorage.getItem('ks-admin-id') ? localStorage.getItem('ks-admin-id') : null,
-      adminName: localStorage.getItem('ks-admin-name') ? localStorage.getItem('ks-admin-name') : '',
-      adminPassword: '',
-    };
-
-    this.setState({ user, admin });
+    this.setState({ user });
 
   }
 
@@ -56,16 +47,6 @@ class AuthPortal extends React.Component {
     this.setState({ user });
 
   }
-
-  handleAdminChange(event) {
-
-    const targetName = event.target.name;
-    const { admin } = this.state;
-    admin[targetName] = event.target.value;
-    this.setState({ admin });
-
-  }
-
 
 
   /**
@@ -92,19 +73,6 @@ class AuthPortal extends React.Component {
   }
 
 
-  handleDialogClickOpen() {
-
-    this.setState({ dialogOpen: true });
-
-  }
-
-  handleDialogClose() {
-
-    this.setState({ dialogOpen: false });
-
-  }
-
-
   render() {
 
     if (!this.state.active) {
@@ -115,15 +83,10 @@ class AuthPortal extends React.Component {
 
     return (
       this.state.user ?
-        <AuthPortalPresentation
+        <AdminPortalPresentation
           {...this.state.user}
-          {...this.state.admin}
-          dialogOpen={this.state.dialogOpen}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          handleDialogClickOpen={this.handleDialogClickOpen}
-          handleDialogClose={this.handleDialogClose}
-          handleAdminChange
         />
         :
         <span />
@@ -133,4 +96,4 @@ class AuthPortal extends React.Component {
 
 }
 
-export default AuthPortal;
+export default AdminPortal;
