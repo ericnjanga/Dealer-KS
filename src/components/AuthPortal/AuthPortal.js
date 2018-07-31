@@ -159,7 +159,7 @@ class AuthPortal extends React.Component {
 
   render() {
 
-    if (!this.state.active) {
+    if (!this.state.active || this.props.admin) {
 
       return false;
 

@@ -102,7 +102,7 @@ const AuthPortalPresentation = ({
 
         <Button
           variant="fab"
-          mini 
+          mini
           aria-label="Add"
           className={classes.button}
           onClick={handleDialogClickOpen}
@@ -111,7 +111,7 @@ const AuthPortalPresentation = ({
           <Icon />
         </Button>
       </Paper>
-      
+
       <AdminDialogPresentation
         handleDialogClose={handleDialogClose}
         dialogOpen={dialogOpen}

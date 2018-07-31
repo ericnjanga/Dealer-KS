@@ -12,6 +12,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { NavLink } from 'react-router-dom';
+import { AdminContext } from './../../services/services-init.js';
 
 
 import FormControl from '@material-ui/core/FormControl';
@@ -130,59 +132,73 @@ class MenuAppBar extends React.Component {
     const open = Boolean(anchorEl);
 
     return (
-      <div className={classes.root}>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch checked={auth} onChange={this.handleChange} aria-label="LoginSwitch" />
-            }
-            label={auth ? 'Logout' : 'Login'}
-          />
-        </FormGroup>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <IconButton onClick={this.props.toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              Photos
-            </Typography>
+      <AdminContext.Consumer>
+        {
+          admin => (
 
-            <Filters handleChange={this.handleFiltersChange} />
+            <div className={classes.root}>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch checked={auth} onChange={this.handleChange} aria-label="LoginSwitch" />
+                  }
+                  label={auth ? 'Logout' : 'Login'}
+                />
+              </FormGroup>
+              <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar> 
+                  <IconButton onClick={this.props.toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
+                    <MenuIcon />
+                  </IconButton>
+    
+                  <Typography variant="title" color="inherit" className={classes.flex}>
+                    Photos
+                  </Typography>
+    
+                  {
+                    admin &&
+                    <NavLink to={`/admin`}>
+                      Admin Portal
+                    </NavLink>
+                  }
+    
+                  <Filters handleChange={this.handleFiltersChange} /> 
+                  {auth && (
+                    <div>
+                      <IconButton
+                        aria-owns={open ? 'menu-appbar' : null}
+                        aria-haspopup="true"
+                        onClick={this.handleMenu}
+                        color="inherit"
+                      >
+                        <AccountCircle />
+                      </IconButton>
+                      <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        open={open}
+                        onClose={this.handleClose}
+                      >
+                        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                        <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                      </Menu>
+                    </div>
+                  )}
+                </Toolbar>
+              </AppBar>
+            </div>
 
-
-            {auth && (
-              <div>
-                <IconButton
-                  aria-owns={open ? 'menu-appbar' : null}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                </Menu>
-              </div>
-            )}
-          </Toolbar>
-        </AppBar>
-      </div>
+          )
+        }
+      </AdminContext.Consumer>
     );
   }
 }

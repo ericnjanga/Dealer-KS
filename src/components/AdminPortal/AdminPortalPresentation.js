@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-// import './AdminPortalPresentation.css';
+import { NavLink } from 'react-router-dom';
 
 const AdminPortalPresentation = ({
   id,
@@ -20,24 +20,32 @@ const AdminPortalPresentation = ({
   classes,
   style
 }) => {
-
-  const introText = `Chocolate bar apple pie lollipop brownie carrot 
-  cake halvah chocolate bar. Toffee candy tiramisu gummi bears. Halvah 
-  cake cheesecake. Chocolate bar apple pie lollipop brownie carrot cake 
-  halvah chocolate bar`;
+ 
 
   return (
     <section style={style.container}>
 
+
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            
+
+            <NavLink to={`/`}>
+              Main Site
+            </NavLink>
+
+          </Toolbar>
+        </AppBar>
+
+
+
+
       <Paper className={classes.root} elevation={1}>
         <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
-          Bienvenue chez <b>Dealer KS</b>
-        </Typography>
-        <Typography component="p">
-          {introText}
-        </Typography>
+          Admin ... <b>Dealer KS</b>
+        </Typography> 
 
-        <form
+        {/* <form
           className={classes.container}
           noValidate
           autoComplete="off"
@@ -90,9 +98,8 @@ const AdminPortalPresentation = ({
               Entrez dans le site
             </Button>
           </div>
-        </form>
+        </form> */}
       </Paper>
-      ????
     </section>
   );
 
@@ -102,13 +109,11 @@ const AdminPortalPresentation = ({
  * Component props validation
  */
 AdminPortalPresentation.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  phoneNumber: PropTypes.string.isRequired,
-  country: PropTypes.string.isRequired,
-  // title: PropTypes.string,
-  // children: PropTypes.shape({}).isRequired,
+  // id: PropTypes.string,
+  // name: PropTypes.string.isRequired,
+  // email: PropTypes.string.isRequired,
+  // phoneNumber: PropTypes.string.isRequired,
+  // country: PropTypes.string.isRequired,
   style: PropTypes.shape({}),
 };
 
@@ -116,7 +121,7 @@ AdminPortalPresentation.propTypes = {
  * Component props default values
  */
 AdminPortalPresentation.defaultProps = {
-  id: null,
+  // id: null,
   style: { // Default styles
     container: {
       position: 'fixed',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { AdminContext } from './services/services-init.js';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,6 +8,7 @@ import 'typeface-roboto';
 import './App.css';
 
 import AuthPortal from './components/AuthPortal/AuthPortal.js';
+import AdminPortal from './components/AdminPortal/AdminPortal.js';
 
 import Hero from './components/Hero/Hero.js';
 import MainCarousel from './components/MainCarousel/MainCarousel.js';
@@ -132,28 +133,6 @@ class App extends Component {
   }
 
 
-  // toggleDrawer(side, open) {
-
-  //   let state = this.state;
-  //   state.drawer[side] = open;
-  //   this.setState({ state });
-
-  // }
-
-
-  // state = {
-  //   admin: null,
-    // drawer: {
-    //   left: false,
-    // },
-  // };
-
-  // updateAdminValue = (admin) => () => {
-  //   console.log('*****admin=', admin);
-  //   this.setState({ admin });
-  // };
-
-
   toggleDrawer = (side, open) => () => {
     let state = this.state;
     state.drawer[side] = open;
@@ -166,16 +145,42 @@ class App extends Component {
         <CssBaseline />
         <AdminContext.Provider value={this.state.admin}>
           <Router>
-            <div className="App">
-              <AuthPortal updateAdminValue={this.updateAdminValue} />
-              <AppDrawer {...this.state} toggleDrawer={this.toggleDrawer} />
-              <MenuAppBar toggleDrawer={this.toggleDrawer} />
-              <Hero />
-              <MainCarousel />
-              {/* <DealsOfTheWeek /> */}
-              <ContactCTA />
-              <CarsListTing classes={CarsListTingStyles} />
-              <Footer />
+            <div className="App"> 
+              <Route
+                path="/"
+                exact={true}
+                render={() => (
+                  <React.Fragment>
+                    <AuthPortal
+                      admin={this.state.admin}
+                      updateAdminValue={this.updateAdminValue}
+                    />
+                    <AppDrawer
+                      {...this.state}
+                      toggleDrawer={this.toggleDrawer}
+                    />
+                    <MenuAppBar 
+                      toggleDrawer={this.toggleDrawer}
+                    />
+                    <Hero />
+                    <MainCarousel />
+                    {/* <DealsOfTheWeek /> */}
+                    <ContactCTA />
+                    <CarsListTing classes={CarsListTingStyles} />
+                    <Footer />
+                  </React.Fragment>
+                )}
+              />
+
+              <Route
+                path="/admin"
+                exact={true}
+                render={() => (
+                  <AdminPortal
+                    admin={this.state.admin}
+                  />
+                )}
+              />
             </div>
           </Router>
         </AdminContext.Provider>

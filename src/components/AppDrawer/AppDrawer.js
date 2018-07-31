@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import { AdminContext } from './../../services/services-init.js';
@@ -46,9 +47,12 @@ const AppDrawer = ({ drawer, toggleDrawer }) => {
         {
           admin &&
           <li>
-            <Button variant="contained" color="secondary">
+            <NavLink to={`/admin`}>
+              Admin Portal
+            </NavLink>
+            {/* <Button variant="contained" color="secondary">
               Edit mode / ON
-            </Button>
+            </Button> */}
           </li>
         }
       </ul>
