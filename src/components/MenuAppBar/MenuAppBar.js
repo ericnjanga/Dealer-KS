@@ -22,6 +22,9 @@ const styles = {
   root: {
     flexGrow: 1,
   },
+  appBar: {
+    zIndex: '10',
+  },
   flex: {
     flexGrow: 1,
   },
@@ -136,7 +139,7 @@ class MenuAppBar extends React.Component {
             label={auth ? 'Logout' : 'Login'}
           />
         </FormGroup>
-        <AppBar position="fixed">
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <IconButton onClick={this.props.toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
               <MenuIcon />

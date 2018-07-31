@@ -2,6 +2,10 @@ import React from 'react';
 import AuthPortalPresentation from './AuthPortalPresentation.js';
 import DBUser from './../../services/DBUser.class.js';
 
+import { adminDefault } from './../../settings/dummy-data.js';
+
+import { AdminContext } from './../../services/services-init.js';
+
 class AuthPortal extends React.Component {
 
   constructor(props) {
@@ -16,6 +20,8 @@ class AuthPortal extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDialogClickOpen = this.handleDialogClickOpen.bind(this);
     this.handleDialogClose = this.handleDialogClose.bind(this);
+    this.handleAdminChange = this.handleAdminChange.bind(this);
+    this.handleAdminSubmit = this.handleAdminSubmit.bind(this);
 
   }
 
@@ -36,8 +42,8 @@ class AuthPortal extends React.Component {
 
     const admin = {
       id: localStorage.getItem('ks-admin-id') ? localStorage.getItem('ks-admin-id') : null,
-      adminName: localStorage.getItem('ks-admin-name') ? localStorage.getItem('ks-admin-name') : '',
-      adminPassword: '',
+      name: localStorage.getItem('ks-admin-name') ? localStorage.getItem('ks-admin-name') : '',
+      password: '',
     };
 
     this.setState({ user, admin });
@@ -46,6 +52,7 @@ class AuthPortal extends React.Component {
 
 
   /**
+   * handle user input change
    * - Save text field changes in the state
    */
   handleChange(event) {
@@ -57,6 +64,11 @@ class AuthPortal extends React.Component {
 
   }
 
+
+  /**
+   * handle admin input change
+   * - Save text field changes in the state
+   */
   handleAdminChange(event) {
 
     const targetName = event.target.name;
@@ -66,6 +78,43 @@ class AuthPortal extends React.Component {
 
   }
 
+
+  /**
+   * - compare input value to admin data
+   * -- if value(name, password) == admin(name, password):
+   * --- update admin in state
+   * --- save admin in localStorage (for easier login later)
+   * --- Pass admin value to props
+   */
+  handleAdminSubmit() {
+
+    const visitor = { ...this.state.admin };
+    const env = this;
+
+    if (visitor.name && visitor.password) {
+
+      const visitorName = visitor.name.trim();
+      const visitorPassword = visitor.password;
+
+      DBUser.get(adminDefault.id).then((admin) => {
+
+        if (visitorName === admin.name && visitorPassword === admin.password) {
+
+          env.setState({
+            dialogOpen: false,
+            active: false,
+          });
+
+          env.props.updateAdminValue(admin);
+          localStorage.setItem('ks-admin-name', admin.name);
+
+        }
+
+      });
+
+    }
+
+  }//[end] handleAdminSubmit
 
 
   /**
@@ -92,6 +141,9 @@ class AuthPortal extends React.Component {
   }
 
 
+  /**
+   * Toggle admin dialog visibility
+   */
   handleDialogClickOpen() {
 
     this.setState({ dialogOpen: true });
@@ -114,19 +166,25 @@ class AuthPortal extends React.Component {
     }
 
     return (
-      this.state.user ?
-        <AuthPortalPresentation
-          {...this.state.user}
-          {...this.state.admin}
-          dialogOpen={this.state.dialogOpen}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          handleDialogClickOpen={this.handleDialogClickOpen}
-          handleDialogClose={this.handleDialogClose}
-          handleAdminChange
-        />
-        :
-        <span />
+      <AdminContext.Provider value={this.state.admin}>
+        {
+          (this.state.user && this.state.admin) ?
+            <AuthPortalPresentation
+              {...this.state.user}
+              adminName={this.state.admin.name}
+              adminPassword={this.state.admin.password}
+              dialogOpen={this.state.dialogOpen}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              handleDialogClickOpen={this.handleDialogClickOpen}
+              handleDialogClose={this.handleDialogClose}
+              handleAdminChange={this.handleAdminChange}
+              handleAdminSubmit={this.handleAdminSubmit}
+            />
+            :
+            <span />
+        }
+      </AdminContext.Provider>
     );
 
   }

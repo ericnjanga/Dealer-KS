@@ -6,6 +6,7 @@ export const currency = {
 };
 
 export const dummyPost = {
+  id: 7,
   title: '[title] Apple pie soufflé candy',
   description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
   price: '700.00',
@@ -37,6 +38,7 @@ export const user = {
 
 export const dummyPosts = [
   {
+    key: 0,
     title: '[title] Apple pie soufflé candy',
     description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
     price: '700.00',
@@ -52,6 +54,7 @@ export const dummyPosts = [
     isVisible: true,
   },
   {
+    key: 1,
     title: '[title] Apple pie soufflé candy',
     description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
     price: '700.00',
@@ -66,6 +69,7 @@ export const dummyPosts = [
     date: '11/07/2018',
     isVisible: true,
   },{
+    key: 2,
     title: '[title] Apple pie soufflé candy',
     description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
     price: '700.00',
@@ -80,6 +84,7 @@ export const dummyPosts = [
     date: '11/07/2018',
     isVisible: true,
   },{
+    key: 3,
     title: '[title] Apple pie soufflé candy',
     description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
     price: '700.00',
@@ -94,6 +99,7 @@ export const dummyPosts = [
     date: '11/07/2018',
     isVisible: true,
   },{
+    key: 14,
     title: '[title] Apple pie soufflé candy',
     description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
     price: '700.00',
@@ -108,6 +114,7 @@ export const dummyPosts = [
     date: '11/07/2018',
     isVisible: true,
   },{
+    key: 4,
     title: '[title] Apple pie soufflé candy',
     description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
     price: '700.00',
@@ -122,6 +129,7 @@ export const dummyPosts = [
     date: '11/07/2018',
     isVisible: true,
   },{
+    key: 5,
     title: '[title] Apple pie soufflé candy',
     description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
     price: '700.00',
@@ -136,6 +144,7 @@ export const dummyPosts = [
     date: '11/07/2018',
     isVisible: true,
   },{
+    key: 6,
     title: '[title] Apple pie soufflé candy',
     description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
     price: '700.00',
@@ -150,6 +159,7 @@ export const dummyPosts = [
     date: '11/07/2018',
     isVisible: true,
   },{
+    key: 7,
     title: '[title] Apple pie soufflé candy',
     description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
     price: '700.00',
@@ -165,3 +175,17 @@ export const dummyPosts = [
     isVisible: true,
   }
 ];
+
+
+export const appText = {
+  loginIntro: `<b>[login - introText]</b> Chocolate bar apple pie lollipop brownie carrot 
+  cake halvah chocolate bar. Toffee candy tiramisu gummi bears. Halvah 
+  cake cheesecake.`,
+  about: ``,
+};
+
+export const adminDefault = {
+  id: '-LIkl4k0oAv47lZc1GqQ',
+  // name: "admin",  --- online
+  // password: "11"
+};

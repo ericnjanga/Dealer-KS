@@ -10,8 +10,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const MainCarouselPresentation = ({ title, items, style }) => {
 
-
-  console.log('>>>>>>>items=', items);
+  // console.log('>>>>>>>items=', items);
 
   if (!items) {
 
@@ -31,8 +30,8 @@ const MainCarouselPresentation = ({ title, items, style }) => {
         margin={10}
       >
         {
-          items.map(item =>{
-            return <Item key={item.title} {...item} />
+          items.map(item => {
+            return <Item {...item} />
           })
         }
       </OwlCarousel>

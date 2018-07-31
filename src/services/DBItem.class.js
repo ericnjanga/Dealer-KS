@@ -3,7 +3,7 @@
  */
 import { database } from './services-init.js';
 
-const nodeName = 'users';
+const nodeName = 'items';
 
 class DBUser {
   // Get a user from the database ...

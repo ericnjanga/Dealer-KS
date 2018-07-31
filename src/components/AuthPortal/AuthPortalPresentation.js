@@ -6,41 +6,32 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/icons/Lock';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { appText } from './../../settings/dummy-data.js';
 import { format } from 'util';
+
+import AdminDialogPresentation from './AdminDialogPresentation.js';
 // import './AuthPortalPresentation.css';
 
 const AuthPortalPresentation = ({
-  id,
   name,
   email,
   phoneNumber,
   country,
-
-  handleChange,
-  handleSubmit,
-
-  handleDialogClickOpen,
-  handleDialogClose,
-
   adminName,
   adminPassword,
-  handleAdminChange,
 
   dialogOpen,
 
-  classes,
-  style
-}) => {
+  handleChange,
+  handleSubmit,
+  handleDialogClickOpen,
+  handleDialogClose,
+  handleAdminChange,
+  handleAdminSubmit,
 
-  const introText = `Chocolate bar apple pie lollipop brownie carrot 
-  cake halvah chocolate bar. Toffee candy tiramisu gummi bears. Halvah 
-  cake cheesecake. Chocolate bar apple pie lollipop brownie carrot cake 
-  halvah chocolate bar`;
+  classes,
+  style,
+}) => {
 
   return (
     <section style={style.container}>
@@ -50,7 +41,7 @@ const AuthPortalPresentation = ({
           Bienvenue chez <b>Dealer KS</b>
         </Typography>
         <Typography component="p">
-          {introText}
+          {appText.loginIntro}
         </Typography>
 
         <form
@@ -121,12 +112,13 @@ const AuthPortalPresentation = ({
         </Button>
       </Paper>
       
-      <AdminDialog
+      <AdminDialogPresentation
         handleDialogClose={handleDialogClose}
         dialogOpen={dialogOpen}
-        adminName={adminName}
-        adminPassword={adminPassword}
+        name={adminName}
+        password={adminPassword}
         handleAdminChange={handleAdminChange}
+        handleAdminSubmit={handleAdminSubmit}
       />
     </section>
   );
@@ -134,80 +126,27 @@ const AuthPortalPresentation = ({
 };
 
 
-const AdminDialog = ({
-  handleDialogClose,
-  handleAdminChange,
-  dialogOpen,
-  adminName,
-  adminPassword,
-}) => {
-  return (
-    <div>
-      <Dialog
-        open={dialogOpen}
-        onClose={handleDialogClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Connection Administrateur"}
-          <Icon />
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-
-
-
-            <form
-              noValidate
-              autoComplete="off"
-              style={{ marginBottom: '20px' }}
-            >
-              <TextField
-                id="adminName"
-                label="Name"
-                name="adminName"
-                value={adminName}
-                onChange={handleAdminChange}
-                margin="normal"
-              />
-              <TextField
-                id="adminPassword"
-                label="Password"
-                name="adminPassword"
-                value={adminPassword}
-                onChange={handleAdminChange}
-                margin="normal"
-              />
-            </form>
-
-
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={handleDialogClose} color="primary" autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
-}
-
 /**
  * Component props validation
  */
 AuthPortalPresentation.propTypes = {
-  id: PropTypes.string,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   phoneNumber: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
-  // title: PropTypes.string,
-  // children: PropTypes.shape({}).isRequired,
+  adminName: PropTypes.string.isRequired,
+  adminPassword: PropTypes.string.isRequired,
+
+  dialogOpen: PropTypes.bool.isRequired,
+
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleDialogClickOpen: PropTypes.func.isRequired,
+  handleDialogClose: PropTypes.func.isRequired,
+  handleAdminChange: PropTypes.func.isRequired,
+  handleAdminSubmit: PropTypes.func.isRequired,
+
+  classes: PropTypes.shape({}),
   style: PropTypes.shape({}),
 };
 
@@ -215,7 +154,8 @@ AuthPortalPresentation.propTypes = {
  * Component props default values
  */
 AuthPortalPresentation.defaultProps = {
-  id: null,
+
+  classes: PropTypes.shape({}),
   style: { // Default styles
     container: {
       position: 'fixed',
@@ -232,6 +172,7 @@ AuthPortalPresentation.defaultProps = {
 
 
 const styles = theme => ({
+
   root: {
     position: 'relative',
     ...theme.mixins.gutters(),

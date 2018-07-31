@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AdminContext, auth, provider } from './services/services-init.js';
+import { AdminContext } from './services/services-init.js';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import logo from './logo.svg';
@@ -109,11 +109,49 @@ const Footer = () => {
 
 
 class App extends Component {
-  state = {
-    drawer: {
-      left: false,
-    },
-  };
+  constructor(props) {
+
+    super(props);
+    this.state = {
+      admin: null,
+      drawer: {
+        left: false,
+      },
+    };
+
+    this.updateAdminValue = this.updateAdminValue.bind(this);
+
+  }
+
+
+  updateAdminValue(admin) {
+
+    console.log('*****admin=', admin);
+    this.setState({ admin });
+
+  }
+
+
+  // toggleDrawer(side, open) {
+
+  //   let state = this.state;
+  //   state.drawer[side] = open;
+  //   this.setState({ state });
+
+  // }
+
+
+  // state = {
+  //   admin: null,
+    // drawer: {
+    //   left: false,
+    // },
+  // };
+
+  // updateAdminValue = (admin) => () => {
+  //   console.log('*****admin=', admin);
+  //   this.setState({ admin });
+  // };
 
 
   toggleDrawer = (side, open) => () => {
@@ -126,26 +164,14 @@ class App extends Component {
     return (
       <React.Fragment>
         <CssBaseline />
-        <AdminContext.Provider value={'fefew'}>
+        <AdminContext.Provider value={this.state.admin}>
           <Router>
             <div className="App">
-              <AuthPortal />
+              <AuthPortal updateAdminValue={this.updateAdminValue} />
               <AppDrawer {...this.state} toggleDrawer={this.toggleDrawer} />
               <MenuAppBar toggleDrawer={this.toggleDrawer} />
               <Hero />
               <MainCarousel />
-              {/* <Carousel title={'Les Affaires de la semaine'}>
-                
-                  <div>*************</div>
-                  <div>*************</div>
-                  <div>*************</div>
-                  <div>*************</div>
-                  <div>*************</div>
-                  <div>*************</div>
-                  <div>*************</div>
-                  <div>*************</div>
-              
-              </Carousel> */}
               {/* <DealsOfTheWeek /> */}
               <ContactCTA />
               <CarsListTing classes={CarsListTingStyles} />
@@ -158,5 +184,16 @@ class App extends Component {
   }
 
 }
+
+
+{/* <AdminContext.Consumer>
+  <div>
+    {
+      admin => (
+        console.log('>>>>>admin=', admin)
+      )
+    }
+  </div>
+</AdminContext.Consumer> */}
 
 export default App;

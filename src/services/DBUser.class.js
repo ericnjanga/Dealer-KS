@@ -3,17 +3,21 @@
  */
 import { database } from './services-init.js';
 
-const nodeName = 'items';
+const nodeName = 'users';
 
 class DBItem {
   // Get a item from the database ...
   // (returns a promise which resolves when the snapshot is ready) 
   static get(uid) {
-    // return new Promise((resolve, reject) => {
-    //   database.ref('/'+nodeName+'/' + uid).once('value').then(function(snapshot) {
-    //     resolve(snapshot.val());
-    //   });
-    // });
+    return new Promise((resolve) => {
+
+      database.ref(`${nodeName}/${uid}`).once('value').then((snapshot) => {
+
+        resolve(snapshot.val());
+
+      });
+
+    });
   }
 
   // Returns a subset (item properties) of an object's properties (object containing many more properties). 

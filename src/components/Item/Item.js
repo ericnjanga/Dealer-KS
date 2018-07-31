@@ -1,21 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Figure from './../Figure.js';
-import Currency from 'react-currency-formatter';
+import Price from './Price.js';
 
-
-const Price = ({ quantity, currency, style}) => {
-
-  return (
-    <span style={style}>
-      <Currency
-        quantity={quantity}
-        currency={currency}
-      />
-    </span>
-  );
-
-};
 
 /**
  * Component representing an item
@@ -52,12 +39,12 @@ const Item = ({
 
         <div style={style.price}>
           <Price
-            quantity="45685"
+            quantity={45685}
             currency="CAD"
             style={style.price1}
           />
           <Price
-            quantity="45685"
+            quantity={45685}
             currency="XAF"
             style={style.price2}
           />
