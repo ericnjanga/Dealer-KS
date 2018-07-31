@@ -1,0 +1,39 @@
+
+.hero {
+  background-color: #000;
+  height: 550px;
+  padding: 20px;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-size: cover;
+  /* background-size: contain; */
+  background-repeat: no-repeat;
+  background-image: url(https://images.unsplash.com/photo-1494905998402-395d579af36f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjExMDUwfQ&s=cd193dd4b502d3ae69e6098d494ca6fc&auto=format&fit=crop&w=1050&q=80);
+}
+
+.hero > div {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  background: rgba(3, 78, 113, 0.7);
+  padding: 30px;
+  font-size: 1.2rem;
+  height: max-content;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero > div > button {
+  min-width: 200px;
+}
+
+.hero > div p {
+  line-height: 2rem;
+}
+
+.hero-title {
+  text-transform: uppercase;
+  font-weight: 700;
+}

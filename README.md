@@ -1,6 +1,6 @@
 
 # Dealer KS
-Dealership listing for the "Kamga Swop" company.
+ReactJS &amp; Firebase Dealership listing in of a fictional "KS dealership" company.
 
 ## Technologies
 - ReactJS

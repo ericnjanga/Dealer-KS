@@ -22,5 +22,14 @@
     "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"] }],
     "arrow-body-style": ["error", "always"],
     "padded-blocks": ["error", {"blocks": "always" }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["Carousel.js"],
+      "rules": {
+        "import/order": "off",
+        "import/first": "off"
+      }
+    }
+  ]
 }
