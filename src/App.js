@@ -146,7 +146,21 @@ class App extends Component {
         <AdminContext.Provider value={this.state.admin}>
           <Router>
             <div className="App"> 
-              <Route
+
+
+
+              {/* <Route
+                path="/admin"
+                exact={true}
+                render={() => ( */}
+                  <AdminPortal
+                    admin={this.state.admin}
+                  />
+                {/* )}
+              /> */}
+
+
+              {/* <Route
                 path="/"
                 exact={true}
                 render={() => (
@@ -164,7 +178,6 @@ class App extends Component {
                     />
                     <Hero />
                     <MainCarousel />
-                    {/* <DealsOfTheWeek /> */}
                     <ContactCTA />
                     <CarsListTing classes={CarsListTingStyles} />
                     <Footer />
@@ -180,7 +193,7 @@ class App extends Component {
                     admin={this.state.admin}
                   />
                 )}
-              />
+              /> */}
             </div>
           </Router>
         </AdminContext.Provider>

@@ -1,12 +1,26 @@
 /**
- * Class dedicated to users
+ * Class dedicated to items
  */
 import { database } from './services-init.js';
 
 const nodeName = 'items';
+const emptyItem = {
+  title: '',
+  description: '',
+  price: '',
+  make: '',
+  year: '',
+  bodyType: '',
+  kilometers: '',
+  color: '',
+  transmission: '',
+  nbDoors: '',
+  fuelType: '',
+  isVisible: true,
+};
 
-class DBUser {
-  // Get a user from the database ...
+class DBItem {
+  // Get a item from the database ...
   // (returns a promise which resolves when the snapshot is ready) 
   static get(uid) {
     // return new Promise((resolve, reject) => {
@@ -16,7 +30,7 @@ class DBUser {
     // });
   }
 
-  // Returns a subset (user properties) of an object's properties (object containing many more properties). 
+  // Returns a subset (item properties) of an object's properties (object containing many more properties). 
   // https://stackoverflow.com/questions/17781472/how-to-get-a-subset-of-a-javascript-objects-properties 
   static getBasicProperties(data) {
     // const properties = (({
@@ -27,51 +41,56 @@ class DBUser {
     // return properties;
   }
 
+
+  static getEmptyItem() {
+    return {...emptyItem};
+  }
+
   /**
-   * Save user data in database:
+   * Save item data in database:
    * - Make sure to create a new key and save it (if record is new)
    * - Otherwise just update the record
    */
-  static save(userObj) {
+  static save(itemObj) {
 
     const listRef = database.ref(nodeName);
-    const user = { ...userObj };
+    const item = { ...itemObj };
     const updates = {};
-    user.createdOn = Date.now();
+    item.createdOn = Date.now();
 
     return new Promise((resolve) => {
 
-      if (!user.id) {
+      if (!item.id) {
         
         // Get a key for a new Post.
-        user.id = listRef.push().key;
+        item.id = listRef.push().key;
       
       }
 
-      updates[`/${user.id}`] = user;
+      updates[`/${item.id}`] = item;
 
-      resolve(user);
+      resolve(item);
 
       return listRef.update(updates);
     });// [end] promise
   }
 
-  //Update user info in the database
+  //Update item info in the database
   static updateProfile(preferences) {
-    // let authObject = this.getCurrentUser();
-    // let tpl_user = {   
+    // let authObject = this.getCurrentitem();
+    // let tpl_item = {   
     //   biography    : preferences.biography,
     //   visible      : preferences.visible,
     //   displayName  : preferences.displayName,
     //   phoneNumber  : preferences.phoneNumber
     // };
     // //These properties will always come from the auth service
-    // //In case user change these outside our app (Google, Yahoo, ...), it will see changes reflected here
-    // tpl_user.photoURL     = authObject.photoURL;
-    // tpl_user.email        = authObject.email;
-    // //Create or update user record in the database
+    // //In case item change these outside our app (Google, Yahoo, ...), it will see changes reflected here
+    // tpl_item.photoURL     = authObject.photoURL;
+    // tpl_item.email        = authObject.email;
+    // //Create or update item record in the database
     // let record = {};
-    // record['/'+nodeName+'/'+ authObject.uid] = tpl_user;
+    // record['/'+nodeName+'/'+ authObject.uid] = tpl_item;
     // return database.ref().update(record); 
   }
 
@@ -85,10 +104,10 @@ class DBUser {
 
   }
 
-  //return currently logged user info
-  static getCurrentUser() {
-    // return auth.currentUser;
+  //return currently logged item info
+  static getCurrentitem() {
+    // return auth.currentitem;
   } 
 }
 
-export default DBUser;
+export default DBItem;

@@ -18,7 +18,7 @@ export const dummyPost = {
   transmission: 'automatic',
   nbDoors: '4',
   fuelType: 'Gasoline',
-  date: '11/07/2018',
+  creationDate: '11/07/2018',
   isVisible: true,
 };
 
@@ -50,7 +50,8 @@ export const dummyPosts = [
     transmission: 'automatic',
     nbDoors: '4',
     fuelType: 'Gasoline',
-    date: '11/07/2018',
+    creationDate: '11/07/2018',
+    img: '...',
     isVisible: true,
   },
   {
@@ -66,7 +67,8 @@ export const dummyPosts = [
     transmission: 'automatic',
     nbDoors: '4',
     fuelType: 'Gasoline',
-    date: '11/07/2018',
+    creationDate: '11/07/2018',
+    img: '...',
     isVisible: true,
   },{
     key: 2,
@@ -81,7 +83,8 @@ export const dummyPosts = [
     transmission: 'automatic',
     nbDoors: '4',
     fuelType: 'Gasoline',
-    date: '11/07/2018',
+    creationDate: '11/07/2018',
+    img: '...',
     isVisible: true,
   },{
     key: 3,
@@ -96,7 +99,8 @@ export const dummyPosts = [
     transmission: 'automatic',
     nbDoors: '4',
     fuelType: 'Gasoline',
-    date: '11/07/2018',
+    creationDate: '11/07/2018',
+    img: '...',
     isVisible: true,
   },{
     key: 14,
@@ -111,7 +115,8 @@ export const dummyPosts = [
     transmission: 'automatic',
     nbDoors: '4',
     fuelType: 'Gasoline',
-    date: '11/07/2018',
+    creationDate: '11/07/2018',
+    img: '...',
     isVisible: true,
   },{
     key: 4,
@@ -126,7 +131,8 @@ export const dummyPosts = [
     transmission: 'automatic',
     nbDoors: '4',
     fuelType: 'Gasoline',
-    date: '11/07/2018',
+    creationDate: '11/07/2018',
+    img: '...',
     isVisible: true,
   },{
     key: 5,
@@ -141,7 +147,8 @@ export const dummyPosts = [
     transmission: 'automatic',
     nbDoors: '4',
     fuelType: 'Gasoline',
-    date: '11/07/2018',
+    creationDate: '11/07/2018',
+    img: '...',
     isVisible: true,
   },{
     key: 6,
@@ -156,7 +163,8 @@ export const dummyPosts = [
     transmission: 'automatic',
     nbDoors: '4',
     fuelType: 'Gasoline',
-    date: '11/07/2018',
+    creationDate: '11/07/2018',
+    img: '...',
     isVisible: true,
   },{
     key: 7,
@@ -171,13 +179,15 @@ export const dummyPosts = [
     transmission: 'automatic',
     nbDoors: '4',
     fuelType: 'Gasoline',
-    date: '11/07/2018',
+    creationDate: '11/07/2018',
+    img: '...',
     isVisible: true,
   }
 ];
 
 
 export const appText = {
+  brand: `Dealer KS`,
   loginIntro: `<b>[login - introText]</b> Chocolate bar apple pie lollipop brownie carrot 
   cake halvah chocolate bar. Toffee candy tiramisu gummi bears. Halvah 
   cake cheesecake.`,

@@ -14,6 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { NavLink } from 'react-router-dom';
 import { AdminContext } from './../../services/services-init.js';
+import { appText } from './../../settings/dummy-data.js';
 
 
 import FormControl from '@material-ui/core/FormControl';
@@ -152,7 +153,7 @@ class MenuAppBar extends React.Component {
                   </IconButton>
     
                   <Typography variant="title" color="inherit" className={classes.flex}>
-                    Photos
+                    { appText.brand }
                   </Typography>
     
                   {

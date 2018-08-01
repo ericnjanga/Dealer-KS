@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { NavLink } from 'react-router-dom';
+import { appText } from './../../settings/dummy-data.js';
+
+import ItemCreateForm from './../Item/ItemCreateForm/ItemCreateForm.js';
 
 const AdminPortalPresentation = ({
   id,
@@ -18,12 +22,77 @@ const AdminPortalPresentation = ({
   handleSubmit,
 
   classes,
+  spacing,
   style
 }) => {
  
 
   return (
     <section style={style.container}>
+
+      <Grid
+        container
+        justify="center"
+        spacing={Number('16')}
+      >
+        <Grid
+          className={classes.item}
+          item
+          xs={12}
+          sm={12}
+          md={4}
+        >
+          <Paper className={classes.section} elevation={1}>
+            <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
+              Inventaire
+            </Typography> 
+            <p>?????</p>
+          </Paper>
+        </Grid>
+        <Grid
+          className={classes.item}
+          item
+          xs={12}
+          sm={12}
+          md={4}
+        >
+          <Paper className={classes.section} elevation={1}>
+            <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
+              Marques
+            </Typography> 
+            <p>?????</p>
+          </Paper>
+
+          <Paper className={classes.section} elevation={1}>
+            <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
+              Types de corps
+            </Typography> 
+            <p>?????</p>
+          </Paper>
+
+          <Paper className={classes.section} elevation={1}>
+            <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
+              Couleurs
+            </Typography> 
+            <p>?????</p>
+          </Paper>
+        </Grid>
+        <Grid
+          className={classes.item}
+          item
+          xs={12}
+          sm={12}
+          md={4}
+        >
+          <Paper className={classes.section} elevation={1}>
+            <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
+              Voiture
+            </Typography>
+
+            <ItemCreateForm />
+          </Paper>
+        </Grid>
+      </Grid>
 
 
         <AppBar position="fixed" className={classes.appBar}>
@@ -40,66 +109,7 @@ const AdminPortalPresentation = ({
 
 
 
-      <Paper className={classes.root} elevation={1}>
-        <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
-          Admin ... <b>Dealer KS</b>
-        </Typography> 
-
-        {/* <form
-          className={classes.container}
-          noValidate
-          autoComplete="off"
-          style={{ marginBottom: '20px' }}
-        >
-          <TextField
-            id="name"
-            label="Name"
-            name="name"
-            className={classes.textField}
-            value={name}
-            onChange={handleChange}
-            margin="normal"
-          />
-          <TextField
-            id="email"
-            label="Email"
-            name="email"
-            className={classes.textField}
-            value={email}
-            onChange={handleChange}
-            margin="normal"
-          />
-          <TextField
-            id="phoneNumber"
-            label="Numero de téléphone"
-            name="phoneNumber"
-            className={classes.textField}
-            value={phoneNumber}
-            onChange={handleChange}
-            margin="normal"
-          />
-          <TextField
-            id="country"
-            label="Pays"
-            name="country"
-            className={classes.textField}
-            value={country}
-            onChange={handleChange}
-            margin="normal"
-          />
-
-          <div style={{ marginTop: '40px' }}>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.textField}
-              onClick={handleSubmit}
-            >
-              Entrez dans le site
-            </Button>
-          </div>
-        </form> */}
-      </Paper>
+      
     </section>
   );
 
@@ -109,11 +119,7 @@ const AdminPortalPresentation = ({
  * Component props validation
  */
 AdminPortalPresentation.propTypes = {
-  // id: PropTypes.string,
-  // name: PropTypes.string.isRequired,
-  // email: PropTypes.string.isRequired,
-  // phoneNumber: PropTypes.string.isRequired,
-  // country: PropTypes.string.isRequired,
+  spacing: PropTypes.string,
   style: PropTypes.shape({}),
 };
 
@@ -122,16 +128,19 @@ AdminPortalPresentation.propTypes = {
  */
 AdminPortalPresentation.defaultProps = {
   // id: null,
+  spacing: '40',
   style: { // Default styles
     container: {
-      position: 'fixed',
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      zIndex: '20',
+      padding: '80px 30px 30px 30px',
+      backgroundColor: 'rgb(199, 207, 212)',
+      // position: 'fixed',
+      // width: '100%',
+      // height: '100%',
+      // display: 'flex',
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      // zIndex: '20',
     },
   },
 };
@@ -139,15 +148,19 @@ AdminPortalPresentation.defaultProps = {
 
 const styles = theme => ({
   root: {
+    marginBottom: '30px',
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 4,
     paddingBottom: theme.spacing.unit * 4,
     maxWidth: '400px',
   },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
+  section: {
+    position: 'relative',
+    marginBottom: '30px',
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 4,
+    paddingBottom: theme.spacing.unit * 4,
+    // maxWidth: '400px',
   },
 });
 

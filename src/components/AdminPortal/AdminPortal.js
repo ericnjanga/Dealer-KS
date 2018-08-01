@@ -80,36 +80,31 @@ class AdminPortal extends React.Component {
 
   render() {
 
-    if (!this.props.admin) {
+    // // Return to home page if there is no admin data
+    // if (!this.props.admin) {
 
-      return (
-        <div>
-          <Redirect to="/"/>
-          {/* <Route
-            exact
-            path="/login"
-            render={() => (
-              <ViewLogin {...props} />
-            )}
-          />  */}
-        </div>
-      );
+    //   return (
+    //     <div>
+    //       <Redirect to="/" />
+    //     </div>
+    //   );
 
-    }
+    // }
 
+    // return (
+    //   <AdminContext.Consumer>
+    //     {
+    //       admin => (
+    //         <AdminPortalPresentation/>
+    //       )
+    //     }
+    //   </AdminContext.Consumer>
+    // );
+
+
+    // Temporary
     return (
-      <AdminContext.Consumer>
-        {
-          // console.log('>>>>admin=', admin)
-          admin => (
-            <AdminPortalPresentation
-              // {...this.state.user}
-              // handleChange={this.handleChange}
-              // handleSubmit={this.handleSubmit}
-            />
-          )
-        }
-      </AdminContext.Consumer>
+      <AdminPortalPresentation />
     );
 
   }
