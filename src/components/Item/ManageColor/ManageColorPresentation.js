@@ -10,38 +10,27 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import Spinner from './../../../components/Spinner/Spinner.js';
-
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import Grid from '@material-ui/core/Grid';
 
-const ImgUpload = () => {
-  return(
-    <div style={{ padding:'30px', border:'3px dashed #009dff' }}>
-      <ImgIcon />
-    </div>
-  );
-}
 
+const ItemCreateFormPresentation = ({
 
-const ManageColorPresentation = ({
-
-  title,
-  description,
-  price,
-  make,
-  year,
-  bodyType,
-  kilometers,
-  color,
-  transmission,
-  nbDoors,
-  fuelType,
-  isVisible,
+  name,
+  // description,
+  // price,
+  // make,
+  // year,
+  // bodyType,
+  // kilometers,
+  // color,
+  // transmission,
+  // nbDoors,
+  // fuelType,
+  // isVisible,
 
   formActive,
-
-  colorList,
 
   handleChange,
   handleSubmit,
@@ -53,23 +42,34 @@ const ManageColorPresentation = ({
 
   return(
     <form
-       
       noValidate
       autoComplete="off"
-      style={{ marginBottom: '20px' }}
     >
       <Spinner hide={formActive} />
-      <ImgUpload />
       <TextField
-        id="title"
-        label="Title"
-        name="title"
+        id="name"
+        label="name"
+        name="name"
         className={classes.textField}
-        value={title}
+        value={name}
         onChange={handleChange}
         margin="normal"
       />
-      <TextField
+
+
+      <div style={{ marginTop: '20px' }}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.textField}
+          onClick={handleSubmit}
+        >
+          Create
+        </Button>
+      </div>
+
+
+      {/* <TextField
         id="description"
         label="Décrivez la voiture"
         name="description"
@@ -78,7 +78,7 @@ const ManageColorPresentation = ({
         value={description}
         onChange={handleChange}
         margin="normal"
-      />
+      /> */}
 
 
       {
@@ -87,7 +87,7 @@ const ManageColorPresentation = ({
          * -----
          */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -124,7 +124,7 @@ const ManageColorPresentation = ({
             margin="normal"
           />
         </Grid>
-      </Grid>
+      </Grid> */}
  
 
       {
@@ -133,7 +133,7 @@ const ManageColorPresentation = ({
          * -----
          */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -174,7 +174,7 @@ const ManageColorPresentation = ({
             </Select>
           </FormControl>
         </Grid>
-      </Grid>
+      </Grid> */}
  
 
       {
@@ -183,7 +183,7 @@ const ManageColorPresentation = ({
           * -----
           */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -230,7 +230,7 @@ const ManageColorPresentation = ({
             </Select>
           </FormControl>
         </Grid>
-      </Grid>
+      </Grid> */}
  
 
       {
@@ -239,7 +239,7 @@ const ManageColorPresentation = ({
            * -----
            */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -285,7 +285,7 @@ const ManageColorPresentation = ({
             </Select>
           </FormControl>
         </Grid>
-      </Grid>
+      </Grid> */}
  
 
       {
@@ -294,7 +294,7 @@ const ManageColorPresentation = ({
             * -----
             */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -311,21 +311,16 @@ const ManageColorPresentation = ({
               value={color}
               onChange={handleChange}
               inputProps={{
-                name: 'color',
+                name: 'age',
                 id: 'color',
               }}
             >
-              {
-                colorList.map(({ id, name })=>
-                  <MenuItem key={id} value={name}>{name}</MenuItem>
-                )
-              }
-              {/* <MenuItem value="Rouge">Rouge</MenuItem>
-              <MenuItem value="Verte">Verte</MenuItem> */}
+              <MenuItem value="Rouge">Rouge</MenuItem>
+              <MenuItem value="Verte">Verte</MenuItem>
             </Select>
           </FormControl>
         </Grid>
-      </Grid>
+      </Grid> */}
  
 
       {
@@ -334,7 +329,7 @@ const ManageColorPresentation = ({
              * -----
              */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -358,7 +353,7 @@ const ManageColorPresentation = ({
             label="Is Visible"
           />
         </Grid>
-      </Grid>
+      </Grid> */}
 
 
 
@@ -368,17 +363,6 @@ const ManageColorPresentation = ({
 
 
           
-
-      <div style={{ marginTop: '40px' }}>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.textField}
-          onClick={handleSubmit}
-        >
-          Create...
-        </Button>
-      </div>
     </form>
   );
 
@@ -389,23 +373,21 @@ const ManageColorPresentation = ({
 /**
  * Component props validation
  */
-ManageColorPresentation.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  make: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  bodyType: PropTypes.string.isRequired,
-  kilometers: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  transmission: PropTypes.string.isRequired,
-  nbDoors: PropTypes.string.isRequired,
-  fuelType: PropTypes.string.isRequired,
-  isVisible: PropTypes.bool.isRequired,
+ItemCreateFormPresentation.propTypes = {
+  name: PropTypes.string,
+  // description: PropTypes.string.isRequired,
+  // price: PropTypes.string.isRequired,
+  // make: PropTypes.string.isRequired,
+  // year: PropTypes.string.isRequired,
+  // bodyType: PropTypes.string.isRequired,
+  // kilometers: PropTypes.string.isRequired,
+  // color: PropTypes.string.isRequired,
+  // transmission: PropTypes.string.isRequired,
+  // nbDoors: PropTypes.string.isRequired,
+  // fuelType: PropTypes.string.isRequired,
+  // isVisible: PropTypes.bool.isRequired,
 
   formActive: PropTypes.bool,
-
-  colorList: PropTypes.arrayOf(PropTypes.shape({})),
 
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
@@ -417,10 +399,10 @@ ManageColorPresentation.propTypes = {
 /**
  * Component props default values
  */
-ManageColorPresentation.defaultProps = {
-  colorList: PropTypes.arrayOf(PropTypes.shape({})),
-  spacing: '16',
+ItemCreateFormPresentation.defaultProps = {
+  name: '',
   formActive: true,
+  spacing: '16',
   style: { // Default styles
     container: {
       position: 'fixed',
@@ -451,4 +433,4 @@ const styles = theme => ({
 });
 
 
-export default withStyles(styles)(ManageColorPresentation);
+export default withStyles(styles)(ItemCreateFormPresentation);

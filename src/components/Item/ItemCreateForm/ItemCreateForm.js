@@ -9,7 +9,7 @@ class ItemCreateForm extends React.Component {
 
     super(props);
     this.state = {
-      formActive: true,
+      formInactive: true,
       form: {
         title: '',
         description: '',
@@ -39,14 +39,19 @@ class ItemCreateForm extends React.Component {
     form[targetName] = event.target.value;
     this.setState({ form });
 
+    // console.log('**********************');
+    // console.log('**********************');
+    // console.log('targetNam=', targetName);
+    // console.log('event.target.value=', event.target.value);
+    // console.log('**********************');
+    // console.log('**********************');
+
   }
 
 
   handleSubmit() {
-
-    console.log('....DBItem()');
-
-    this.setState({ formActive: false });
+    console.log('**********************');
+    this.setState({ formInactive: true });
     DBItem.save(this.state.form).then((itemCreated) => {
       
       console.log('....itemCreated=', itemCreated);
@@ -54,7 +59,7 @@ class ItemCreateForm extends React.Component {
       const form = DBItem.getEmptyItem();
       this.setState({
         form,
-        formActive: false,
+        formInactive: false,
       });
 
     });
@@ -63,10 +68,18 @@ class ItemCreateForm extends React.Component {
 
   render() {
 
+    // Don't render component if ...
+    if (!this.state) {
+
+      return false;
+
+    }
+
     return (
       <ItemCreateFormPresentation
         {...this.state.form}
-        formActive={this.state.formActive}
+        {...this.props}
+        formInactive={this.state.formInactive}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
       />

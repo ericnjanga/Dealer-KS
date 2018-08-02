@@ -7,19 +7,27 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { NavLink } from 'react-router-dom';
+
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import { appText } from './../../settings/dummy-data.js';
 
 import ItemCreateForm from './../Item/ItemCreateForm/ItemCreateForm.js';
+import ManageColor from './../Item/ManageColor/ManageColor.js';
+import TableDisplay from './../TableDisplay/TableDisplay.js';
+
+import './AdminPortalPresentation.css';
 
 const AdminPortalPresentation = ({
-  id,
-  name,
-  email,
-  phoneNumber,
-  country,
+  items,
+  itemColors,
 
-  handleChange,
-  handleSubmit,
+  makePanelActive,
+  bodytypePanelActive,
+  colorPanelActive,
+
+  handleColorDelete,
+  handleItemDelete,
 
   classes,
   spacing,
@@ -39,69 +47,140 @@ const AdminPortalPresentation = ({
           className={classes.item}
           item
           xs={12}
-          sm={12}
-          md={4}
+          sm={6}
+          md={6}
         >
-          <Paper className={classes.section} elevation={1}>
-            <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
-              Inventaire
-            </Typography> 
-            <p>?????</p>
-          </Paper>
+          <TableDisplay
+            heroText="Inventaire de voiture"
+            data={items}
+            headers={['title', 'createdOn', 'color']}
+            handleDelete={handleItemDelete}
+          />
         </Grid>
         <Grid
           className={classes.item}
           item
           xs={12}
-          sm={12}
-          md={4}
+          sm={3}
+          md={3}
         >
-          <Paper className={classes.section} elevation={1}>
-            <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
-              Marques
-            </Typography> 
-            <p>?????</p>
-          </Paper>
+ 
+  
 
-          <Paper className={classes.section} elevation={1}>
-            <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
-              Types de corps
-            </Typography> 
-            <p>?????</p>
-          </Paper>
+          {
+            makePanelActive &&
+            <Paper className={classes.section} elevation={1}>
+              <Typography variant="title" id="tableTitle" className={classes.hero}>
+                Marque
+              </Typography>
+              <p>?????</p>
+            </Paper>
+          }
 
-          <Paper className={classes.section} elevation={1}>
-            <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
+
+          {
+            bodytypePanelActive &&
+            <Paper className={classes.section} elevation={1}>
+              <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
+                Types de corps
+              </Typography> 
+              <p>#########</p>
+            </Paper>
+          }
+
+
+          {
+            colorPanelActive &&
+            <Paper className={classes.section} elevation={1}>
+              <Typography variant="title" id="tableTitle" className={classes.hero}>
               Couleurs
-            </Typography> 
-            <p>?????</p>
-          </Paper>
+              </Typography>
+              <ManageColor />
+
+              <TableDisplay
+                data={itemColors}
+                headers={['name']}
+                handleDelete={handleColorDelete}
+              />
+            </Paper>
+          }
+
+
+          
+
         </Grid>
         <Grid
           className={classes.item}
           item
           xs={12}
-          sm={12}
-          md={4}
+          sm={3}
+          md={3}
         >
           <Paper className={classes.section} elevation={1}>
             <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
               Voiture
             </Typography>
 
-            <ItemCreateForm />
+            <ItemCreateForm
+              colorList={itemColors}
+            />
           </Paper>
         </Grid>
       </Grid>
 
 
-        <AppBar position="fixed" className={classes.appBar}>
+        <AppBar
+          position="fixed"
+          className={`${classes.appBar} admin-menubar`}
+        >
           <Toolbar>
             
 
             <NavLink to={`/`}>
               Main Site
             </NavLink>
+
+
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={colorPanelActive}
+                  // onChange={this.handleChange('checkedB')}
+                  value="checkedB"
+                  color="primary"
+                />
+              }
+              label="Editer les couleurs"
+            />
+
+
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={bodytypePanelActive}
+                  // onChange={this.handleChange('checkedB')}
+                  value="checkedB"
+                  color="primary"
+                />
+              }
+              label="Editer les types de corps"
+            />
+
+
+            <FormControlLabel 
+              className={classes.menubar}
+              control={
+                <Checkbox
+                  checked={makePanelActive}
+                  // onChange={this.handleChange('checkedB')}
+                  value="checkedB"
+                  color="primary"
+                  className={classes.menubar}
+                />
+              }
+              label="Editer les marques"
+            />
+ 
 
           </Toolbar>
         </AppBar>
@@ -115,11 +194,25 @@ const AdminPortalPresentation = ({
 
 };
 
+
+
+
+
+
+
 /**
  * Component props validation
  */
 AdminPortalPresentation.propTypes = {
-  spacing: PropTypes.string,
+  items: PropTypes.arrayOf(PropTypes.shape({})),
+  itemColors: PropTypes.arrayOf(PropTypes.shape({})),
+  handleColorDelete: PropTypes.func,
+  handleItemDelete: PropTypes.func,
+
+  makePanelActive: PropTypes.bool.isRequired,
+  bodytypePanelActive: PropTypes.bool.isRequired,
+  colorPanelActive: PropTypes.bool.isRequired,
+
   style: PropTypes.shape({}),
 };
 
@@ -127,7 +220,10 @@ AdminPortalPresentation.propTypes = {
  * Component props default values
  */
 AdminPortalPresentation.defaultProps = {
-  // id: null,
+  items: PropTypes.arrayOf(PropTypes.shape({})),
+  itemColors: PropTypes.arrayOf(PropTypes.shape({})),
+  handleColorDelete: null,
+  handleItemDelete: null,
   spacing: '40',
   style: { // Default styles
     container: {
@@ -147,6 +243,12 @@ AdminPortalPresentation.defaultProps = {
 
 
 const styles = theme => ({
+  hero: {
+    textAlign: 'left',
+    padding: '20px 20px 0 0',
+    // fontWeight: 'bold',
+    fontSize: '20px',
+  },
   root: {
     marginBottom: '30px',
     ...theme.mixins.gutters(),
@@ -158,9 +260,14 @@ const styles = theme => ({
     position: 'relative',
     marginBottom: '30px',
     ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 4,
+    // paddingTop: theme.spacing.unit * 4,
     paddingBottom: theme.spacing.unit * 4,
     // maxWidth: '400px',
+  },
+  menubar: {
+    
+      color: '#fff',
+    
   },
 });
 

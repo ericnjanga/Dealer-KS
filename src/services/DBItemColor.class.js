@@ -3,23 +3,12 @@
  */
 import { database } from './services-init.js';
 
-const nodeName = 'items';
+const nodeName = 'itemColors';
 const emptyItem = {
-  title: '',
-  description: '',
-  price: '',
-  make: '',
-  year: '',
-  bodyType: '',
-  kilometers: '',
-  color: '',
-  transmission: '',
-  nbDoors: '',
-  fuelType: '',
-  isVisible: true,
+  name: '',
 };
 
-class DBItem {
+class DBItemColor {
   // Get a item from the database ...
   // (returns a promise which resolves when the snapshot is ready) 
   static get(uid) {
@@ -96,7 +85,7 @@ class DBItem {
 
   
   /**
- * Return database node (for external use)
+   * Return database node (for external use)
    */
   static getNode() {
 
@@ -104,7 +93,7 @@ class DBItem {
 
   }
 
-  //return currently logged item info
+  // return currently logged item info
   static getCurrentitem() {
     // return auth.currentitem;
   } 
@@ -118,4 +107,4 @@ class DBItem {
   }
 }
 
-export default DBItem;
+export default DBItemColor;

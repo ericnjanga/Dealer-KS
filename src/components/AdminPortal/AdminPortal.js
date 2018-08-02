@@ -3,17 +3,21 @@ import AdminPortalPresentation from './AdminPortalPresentation.js';
 import { Redirect } from 'react-router-dom';
 
 import { AdminContext } from './../../services/services-init.js';
-import DBUser from './../../services/DBUser.class.js';
+import DBItem from './../../services/DBItem.class.js';
+import DBItemColor from './../../services/DBItemColor.class.js';
 
 class AdminPortal extends React.Component {
 
   constructor(props) {
 
     super(props);
-    // this.state = {
-    //   active: true, // component visibility
-    // };
-
+    this.state = {
+      makePanelActive: true,
+      bodytypePanelActive: true,
+      colorPanelActive: true,
+    };
+    this.handleColorDelete = this.handleColorDelete.bind(this);
+    this.handleItemDelete = this.handleItemDelete.bind(this);
     // this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -28,17 +32,78 @@ class AdminPortal extends React.Component {
 
     console.log('****-*****', this.props.admin);
 
-    // const user = {
-    //   id: localStorage.getItem('ks-user-id') ? localStorage.getItem('ks-user-id') : null,
-    //   name: localStorage.getItem('ks-user-name') ? localStorage.getItem('ks-user-name') : '',
-    //   email: localStorage.getItem('ks-user-email') ? localStorage.getItem('ks-user-email') : '',
-    //   phoneNumber: localStorage.getItem('ks-user-phoneNumber') ? localStorage.getItem('ks-user-phoneNumber') : '',
-    //   country: localStorage.getItem('ks-user-country') ? localStorage.getItem('ks-user-country') : '',
-    // };
 
-    // this.setState({ user });
 
+
+
+    /**
+     * GET ALL ITEMS
+     * -------------
+     * Save a reverse list of items in the state
+     */
+    DBItem.getNode().on('value', (snapshot) => {
+
+      const nodeVal = snapshot.val();
+      const tempsItems = [];
+      if (nodeVal) {//Avoid error if there is no DB objects 
+        const itemsMap = new Map(Object.entries(nodeVal));
+        itemsMap.forEach((value) => {
+          const post = Object.assign({}, value);
+          // push values in a regular array
+          tempsItems.push(post);
+        }); // itemsMap
+      }//nodeVal
+      // save array in state
+      const itemsReverse = tempsItems.reverse();
+      console.log('>>>>itemsReverse=', itemsReverse);
+      const items = [...itemsReverse];
+      console.log('>>>>items=', items);
+      this.setState({ items });
+
+    }); // [end] items ...
+
+
+    /**
+     * GET ALL COLORS
+     * -------------
+     * Save a reverse list of items in the state
+     */
+    DBItemColor.getNode().on('value', (snapshot) => {
+  
+      const nodeVal = snapshot.val();
+      const tempsItems = [];
+      if (nodeVal) {//Avoid error if there is no DB objects 
+        const itemsMap = new Map(Object.entries(nodeVal));
+        itemsMap.forEach((value) => {
+          const post = Object.assign({}, value);
+          // push values in a regular array
+          tempsItems.push(post);
+        }); // itemsMap
+      }//nodeVal
+      // save array in state
+      const itemsReverse = tempsItems.reverse();
+      console.log('>>>>itemsReverse=', itemsReverse);
+      const itemColors = [...itemsReverse];
+      console.log('>>>>items=', itemColors);
+      this.setState({ itemColors });
+  
+    }); // [end] Colors ...
+
+  } // [end] componentDidMount
+
+
+  handleItemDelete(key) {
+
+    // still need to delete the attached image
+    DBItem.remove(key);
   }
+
+
+  handleColorDelete(key) {
+    DBItemColor.remove(key);
+  }
+
+
 
 
   /**
@@ -61,7 +126,7 @@ class AdminPortal extends React.Component {
    */
   handleSubmit() {
 
-    // DBUser.save({ ...this.state.user }).then(({
+    // DBItem.save({ ...this.state.user }).then(({
     //   id, name, email, phoneNumber, country,
     // }) => {
 
@@ -103,8 +168,22 @@ class AdminPortal extends React.Component {
 
 
     // Temporary
+    // ---------------
+
+    // Don't render component if ...
+    if (!this.state || !this.state.items || !this.state.itemColors || this.state.formActive) {
+
+      return false;
+
+    }
+
+
     return (
-      <AdminPortalPresentation />
+      <AdminPortalPresentation
+        {...this.state}
+        handleColorDelete={this.handleColorDelete}
+        handleItemDelete={this.handleItemDelete}
+      />
     );
 
   }
