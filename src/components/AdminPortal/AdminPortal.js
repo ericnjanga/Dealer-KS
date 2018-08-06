@@ -1,10 +1,10 @@
 import React from 'react';
 import AdminPortalPresentation from './AdminPortalPresentation.js';
-import { Redirect } from 'react-router-dom';
+import settings from './../../settings/basics.js';
+// import { Redirect } from 'react-router-dom';
 
-import { AdminContext } from './../../services/services-init.js';
+// import { AdminContext } from './../../services/services-init.js';
 import DBItem from './../../services/DBItem.class.js';
-import DBItemColor from './../../services/DBItemColor.class.js';
 
 class AdminPortal extends React.Component {
 
@@ -12,13 +12,11 @@ class AdminPortal extends React.Component {
 
     super(props);
     this.state = {
-      makePanelActive: true,
-      bodytypePanelActive: true,
-      colorPanelActive: true,
+      presets: [...settings.presets],
     };
-    this.handleColorDelete = this.handleColorDelete.bind(this);
-    this.handleItemDelete = this.handleItemDelete.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleCK1Change = this.handleCK1Change.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
 
   }
@@ -29,12 +27,6 @@ class AdminPortal extends React.Component {
    * (empty values is nothing has been saved to the state)
    */
   componentDidMount() {
-
-    console.log('****-*****', this.props.admin);
-
-
-
-
 
     /**
      * GET ALL ITEMS
@@ -55,53 +47,64 @@ class AdminPortal extends React.Component {
       }//nodeVal
       // save array in state
       const itemsReverse = tempsItems.reverse();
-      console.log('>>>>itemsReverse=', itemsReverse);
       const items = [...itemsReverse];
-      console.log('>>>>items=', items);
       this.setState({ items });
 
     }); // [end] items ...
 
 
     /**
-     * GET ALL COLORS
+     * GET ALL Presets
      * -------------
-     * Save a reverse list of items in the state
+     * Save a reverse list of items in the "list" property of each individual "preset" object
+     * (Replace the whole "preset" object back in the state)
      */
-    DBItemColor.getNode().on('value', (snapshot) => {
-  
-      const nodeVal = snapshot.val();
-      const tempsItems = [];
-      if (nodeVal) {//Avoid error if there is no DB objects 
-        const itemsMap = new Map(Object.entries(nodeVal));
-        itemsMap.forEach((value) => {
-          const post = Object.assign({}, value);
-          // push values in a regular array
-          tempsItems.push(post);
-        }); // itemsMap
-      }//nodeVal
-      // save array in state
-      const itemsReverse = tempsItems.reverse();
-      console.log('>>>>itemsReverse=', itemsReverse);
-      const itemColors = [...itemsReverse];
-      console.log('>>>>items=', itemColors);
-      this.setState({ itemColors });
-  
-    }); // [end] Colors ...
+    const { presets } = this.state;
+
+    for (let i = 0, l = presets.length; i < l; i += 1) {
+
+      DBItem.getNode(presets[i].name).on('value', (snapshot) => {
+
+        const nodeVal = snapshot.val();
+        const tempsItems = [];
+        if (nodeVal) {//Avoid error if there is no DB objects 
+          const itemsMap = new Map(Object.entries(nodeVal));
+          itemsMap.forEach((value) => {
+            const post = Object.assign({}, value);
+            // push values in a regular array
+            tempsItems.push(post);
+
+          }); // itemsMap
+        }//nodeVal
+        // save array in state
+        presets[i].list = [];
+        const itemsReverse = tempsItems.reverse();
+        presets[i].list = [...itemsReverse];
+        this.setState({ presets });
+
+      }); // [end] GET ALL Presets
+
+    }
 
   } // [end] componentDidMount
 
 
-  handleItemDelete(key) {
+  handleDelete(key, preset) {
 
     // still need to delete the attached image
-    DBItem.remove(key);
+    DBItem.remove(key, preset);
+
   }
 
+  handleEdit(key, preset) {
 
-  handleColorDelete(key) {
-    DBItemColor.remove(key);
+    console.log('-----edit-----');
+
+    // // still need to delete the attached image
+    // DBItem.remove(key, preset);
+
   }
+
 
 
 
@@ -109,12 +112,22 @@ class AdminPortal extends React.Component {
   /**
    * - Save text field changes in the state
    */
-  handleChange(event) {
+  handleCK1Change(event) {
 
-    // const targetName = event.target.name;
-    // const { user } = this.state;
-    // user[targetName] = event.target.value;
-    // this.setState({ user });
+    const targetName = event.target.name;
+    const targetValue = event.target.value ==='true' ? false : true;
+    const { presets } = this.state;
+
+    for(let i in presets) { 
+      if (presets[i].name === targetName) {
+        presets[i].active = targetValue;
+        break;
+      }
+    } 
+
+    // console.log(`${targetName} - ${targetValue}`);
+ 
+    this.setState({ presets });
 
   }
 
@@ -139,6 +152,13 @@ class AdminPortal extends React.Component {
     // });
 
     // this.setState({ active: !this.state.active });
+
+  }
+
+
+  componentReady() {
+
+    return this.state && this.state.items && this.state.presets;
 
   }
 
@@ -171,18 +191,18 @@ class AdminPortal extends React.Component {
     // ---------------
 
     // Don't render component if ...
-    if (!this.state || !this.state.items || !this.state.itemColors || this.state.formActive) {
+    if (!this.componentReady()) {
 
       return false;
 
     }
 
-
     return (
       <AdminPortalPresentation
         {...this.state}
-        handleColorDelete={this.handleColorDelete}
-        handleItemDelete={this.handleItemDelete}
+        handleEdit={this.handleEdit}
+        handleDelete={this.handleDelete}
+        handleCK1Change={this.handleCK1Change}
       />
     );
 

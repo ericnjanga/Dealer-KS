@@ -1,39 +1,34 @@
 
 
-// Could be changed by the admin at any time
-export const currency = {
-  'CAD_XAF': 426.07,
-};
+// export const dummyPost = {
+//   id: 7,
+//   title: '[title] Apple pie soufflé candy',
+//   description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
+//   price: '700.00',
+//   make: 'toyota',
+//   year: '2000',
+//   bodyType: 'sedan',
+//   kilometers: '200,000',
+//   color: 'red',
+//   transmission: 'automatic',
+//   nbDoors: '4',
+//   fuelType: 'Gasoline',
+//   creationDate: '11/07/2018',
+//   isVisible: true,
+// };
 
-export const dummyPost = {
-  id: 7,
-  title: '[title] Apple pie soufflé candy',
-  description: 'Chocolate cake icing pie dragée jujubes sweet roll apple pie jelly icing. Jelly-o gingerbread sweet ',
-  price: '700.00',
-  make: 'toyota',
-  year: '2000',
-  bodyType: 'sedan',
-  kilometers: '200,000',
-  color: 'red',
-  transmission: 'automatic',
-  nbDoors: '4',
-  fuelType: 'Gasoline',
-  creationDate: '11/07/2018',
-  isVisible: true,
-};
-
-export const user = {
-  biography: '--------?mmmmm',
-  displayName: 'Eric Njan?????',
-  email: 'eric.njanga@gmail.com',
-  lastSignin: 1531940865148,
-  lat: 43.6513932,
-  lng: -79.5642048,
-  phoneNumber: 'xxx xxxx xxx',
-  photoURL: 'https://lh5.googleusercontent.com/-COiFmnKgWAY/AAAAAAAAAAI/AAAAAAAABTk/gGWhai835yE/photo.jpg',
-  uid: '0D2s9A7OyLQqZJS6sdse1SZgspK2',
-  visible: true,
-};
+// export const user = {
+//   biography: '--------?mmmmm',
+//   displayName: 'Eric Njan?????',
+//   email: 'eric.njanga@gmail.com',
+//   lastSignin: 1531940865148,
+//   lat: 43.6513932,
+//   lng: -79.5642048,
+//   phoneNumber: 'xxx xxxx xxx',
+//   photoURL: 'https://lh5.googleusercontent.com/-COiFmnKgWAY/AAAAAAAAAAI/AAAAAAAABTk/gGWhai835yE/photo.jpg',
+//   uid: '0D2s9A7OyLQqZJS6sdse1SZgspK2',
+//   visible: true,
+// };
 
 
 export const dummyPosts = [
@@ -185,17 +180,3 @@ export const dummyPosts = [
   }
 ];
 
-
-export const appText = {
-  brand: `Dealer KS`,
-  loginIntro: `<b>[login - introText]</b> Chocolate bar apple pie lollipop brownie carrot 
-  cake halvah chocolate bar. Toffee candy tiramisu gummi bears. Halvah 
-  cake cheesecake.`,
-  about: ``,
-};
-
-export const adminDefault = {
-  id: '-LIkl4k0oAv47lZc1GqQ',
-  // name: "admin",  --- online
-  // password: "11"
-};

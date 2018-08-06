@@ -50,11 +50,11 @@ class ItemCreateForm extends React.Component {
 
 
   handleSubmit() {
-    console.log('**********************');
+
     this.setState({ formInactive: true });
     DBItem.save(this.state.form).then((itemCreated) => {
       
-      console.log('....itemCreated=', itemCreated);
+      // console.log('....itemCreated=', itemCreated);
 
       const form = DBItem.getEmptyItem();
       this.setState({
@@ -69,7 +69,7 @@ class ItemCreateForm extends React.Component {
   render() {
 
     // Don't render component if ...
-    if (!this.state) {
+    if (!this.state || !this.props.presets) {
 
       return false;
 
@@ -78,7 +78,7 @@ class ItemCreateForm extends React.Component {
     return (
       <ItemCreateFormPresentation
         {...this.state.form}
-        {...this.props}
+        presets={this.props.presets}
         formInactive={this.state.formInactive}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
@@ -86,5 +86,20 @@ class ItemCreateForm extends React.Component {
     );
   }
 }
+
+/**
+ * Component props validation
+ */
+ItemCreateForm.propTypes = {
+  presets: PropTypes.arrayOf(PropTypes.shape({})),
+};
+
+/**
+ * Component props default values
+ */
+ItemCreateForm.defaultProps = {
+  presets: null,
+};
+
 
 export default ItemCreateForm;

@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/icons/Lock';
-import { appText } from './../../settings/dummy-data.js';
+import { appText } from './../../settings/basics.js';
 import { format } from 'util';
 
 import AdminDialogPresentation from './AdminDialogPresentation.js';

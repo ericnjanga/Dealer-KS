@@ -75,6 +75,35 @@ class DBItem {
     });// [end] promise
   }
 
+  /**
+   * Save item data in database:
+   * - Make sure to create a new key and save it (if record is new)
+   * - Otherwise just update the record
+   */
+  static savePreset(preset, itemObj) {
+
+    const listRef = database.ref(`presets/${preset}`);
+    const item = { ...itemObj };
+    const updates = {};
+    item.createdOn = Date.now();
+
+    return new Promise((resolve) => {
+
+      if (!item.id) {
+        
+        // Get a key for a new Post.
+        item.id = listRef.push().key;
+      
+      }
+
+      updates[`/${item.id}`] = item;
+
+      resolve(item);
+
+      return listRef.update(updates);
+    });// [end] promise
+  }
+
   //Update item info in the database
   static updateProfile(preferences) {
     // let authObject = this.getCurrentitem();
@@ -98,9 +127,15 @@ class DBItem {
   /**
  * Return database node (for external use)
    */
-  static getNode() {
+  static getNode(preset) {
 
-    return database.ref(nodeName);
+    if (!preset) {
+
+      return database.ref(nodeName);
+
+    }
+
+    return database.ref(`presets/${preset}`);
 
   }
 
@@ -111,10 +146,18 @@ class DBItem {
 
 
   // Delete a post
-  static remove(id) {
+  static remove(id, preset) {
 
-    return database.ref(`${nodeName}/${id}`).remove();
-    
+    let url = `${nodeName}/${id}`;
+
+    if (preset) {
+
+      url = `presets/${preset}/${id}`;
+
+    }
+
+    return database.ref(url).remove();
+
   }
 }
 

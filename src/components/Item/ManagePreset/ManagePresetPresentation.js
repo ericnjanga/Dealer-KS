@@ -3,73 +3,54 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import ImgIcon from '@material-ui/icons/AddAPhoto';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Checkbox from '@material-ui/core/Checkbox';
 import Spinner from './../../../components/Spinner/Spinner.js';
-
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
-import Grid from '@material-ui/core/Grid';
-
-const ImgUpload = () => {
-  return(
-    <div style={{ padding:'30px', border:'3px dashed #009dff' }}>
-      <ImgIcon />
-    </div>
-  );
-}
+import settings from './../../../settings/basics.js';
 
 
-const ManageColorPresentation = ({
+const ManagePresetPresentation = ({
 
-  title,
-  description,
-  price,
-  make,
-  year,
-  bodyType,
-  kilometers,
-  color,
-  transmission,
-  nbDoors,
-  fuelType,
-  isVisible,
+  name,
 
   formActive,
-
-  presets,
 
   handleChange,
   handleSubmit,
 
   classes,
-  spacing,
-  style,
 }) => {
+
+  const { spacing } = settings.grid;
 
   return(
     <form
-       
       noValidate
       autoComplete="off"
-      style={{ marginBottom: '20px' }}
     >
       <Spinner hide={formActive} />
-      <ImgUpload />
       <TextField
-        id="title"
-        label="Title"
-        name="title"
+        id="name"
+        label="name"
+        name="name"
         className={classes.textField}
-        value={title}
+        value={name}
         onChange={handleChange}
         margin="normal"
       />
-      <TextField
+
+
+      <div style={{ marginTop: '20px' }}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.textField}
+          onClick={handleSubmit}
+        >
+          Create
+        </Button>
+      </div>
+
+
+      {/* <TextField
         id="description"
         label="Décrivez la voiture"
         name="description"
@@ -78,7 +59,7 @@ const ManageColorPresentation = ({
         value={description}
         onChange={handleChange}
         margin="normal"
-      />
+      /> */}
 
 
       {
@@ -87,7 +68,7 @@ const ManageColorPresentation = ({
          * -----
          */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -124,7 +105,7 @@ const ManageColorPresentation = ({
             margin="normal"
           />
         </Grid>
-      </Grid>
+      </Grid> */}
  
 
       {
@@ -133,7 +114,7 @@ const ManageColorPresentation = ({
          * -----
          */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -174,7 +155,7 @@ const ManageColorPresentation = ({
             </Select>
           </FormControl>
         </Grid>
-      </Grid>
+      </Grid> */}
  
 
       {
@@ -183,7 +164,7 @@ const ManageColorPresentation = ({
           * -----
           */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -230,7 +211,7 @@ const ManageColorPresentation = ({
             </Select>
           </FormControl>
         </Grid>
-      </Grid>
+      </Grid> */}
  
 
       {
@@ -239,7 +220,7 @@ const ManageColorPresentation = ({
            * -----
            */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -251,24 +232,17 @@ const ManageColorPresentation = ({
           xs={6}
         >
           <FormControl className={classes.textField}>
-            <InputLabel
-              htmlFor={presets[0].name}
-            >{presets[0].name}
-            </InputLabel>
+            <InputLabel htmlFor="make">Marque</InputLabel>
             <Select
-              value={color}
+              value={make}
               onChange={handleChange}
               inputProps={{
-                name: presets[0].name,
-                id: presets[0].name,
+                name: 'age',
+                id: 'make',
               }}
             >
-              {
-                presets[0].list &&
-                presets[0].list.map(({ id, name })=>
-                  <MenuItem key={id} value={name}>{name}</MenuItem>
-                )
-              }
+              <MenuItem value="Toyota">Toyota</MenuItem>
+              <MenuItem value="Volvo">Volvo</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -278,28 +252,21 @@ const ManageColorPresentation = ({
           xs={6}
         >
           <FormControl className={classes.textField}>
-            <InputLabel
-              htmlFor={presets[1].name}
-            >{presets[1].name}
-            </InputLabel>
+            <InputLabel htmlFor="bodyType">Type de corps</InputLabel>
             <Select
-              value={color}
+              value={bodyType}
               onChange={handleChange}
               inputProps={{
-                name: presets[1].name,
-                id: presets[1].name,
+                name: 'bodyType',
+                id: 'bodyType',
               }}
             >
-              {
-                presets[1].list &&
-                presets[1].list.map(({ id, name })=>
-                  <MenuItem key={id} value={name}>{name}</MenuItem>
-                )
-              }
+              <MenuItem value="SUV, Crossover - 1">SUV, Crossover - 1</MenuItem>
+              <MenuItem value="SUV, Crossover - 2">SUV, Crossover - 2</MenuItem>
             </Select>
           </FormControl>
         </Grid>
-      </Grid>
+      </Grid> */}
  
 
       {
@@ -308,7 +275,7 @@ const ManageColorPresentation = ({
             * -----
             */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -320,28 +287,21 @@ const ManageColorPresentation = ({
           xs={12}
         >
           <FormControl className={classes.textField}>
-            <InputLabel
-              htmlFor={presets[2].name}
-            >{presets[2].name}
-            </InputLabel>
+            <InputLabel htmlFor="color">Couleur</InputLabel>
             <Select
               value={color}
               onChange={handleChange}
               inputProps={{
-                name: presets[2].name,
-                id: presets[2].name,
+                name: 'age',
+                id: 'color',
               }}
             >
-              {
-                presets[2].list &&
-                presets[2].list.map(({ id, name })=>
-                  <MenuItem key={id} value={name}>{name}</MenuItem>
-                )
-              }
+              <MenuItem value="Rouge">Rouge</MenuItem>
+              <MenuItem value="Verte">Verte</MenuItem>
             </Select>
           </FormControl>
         </Grid>
-      </Grid>
+      </Grid> */}
  
 
       {
@@ -350,7 +310,7 @@ const ManageColorPresentation = ({
              * -----
              */
       }
-      <Grid
+      {/* <Grid
         container
         className={classes.container}
         justify="center"
@@ -374,7 +334,7 @@ const ManageColorPresentation = ({
             label="Is Visible"
           />
         </Grid>
-      </Grid>
+      </Grid> */}
 
 
 
@@ -384,70 +344,44 @@ const ManageColorPresentation = ({
 
 
           
-
-      <div style={{ marginTop: '40px' }}>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.textField}
-          onClick={handleSubmit}
-        >
-          Create...
-        </Button>
-      </div>
     </form>
   );
 
 };
 
 
+
 /**
  * Component props validation
  */
-ManageColorPresentation.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  make: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  bodyType: PropTypes.string.isRequired,
-  kilometers: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  transmission: PropTypes.string.isRequired,
-  nbDoors: PropTypes.string.isRequired,
-  fuelType: PropTypes.string.isRequired,
-  isVisible: PropTypes.bool.isRequired,
+ManagePresetPresentation.propTypes = {
+  name: PropTypes.string,
+  // description: PropTypes.string.isRequired,
+  // price: PropTypes.string.isRequired,
+  // make: PropTypes.string.isRequired,
+  // year: PropTypes.string.isRequired,
+  // bodyType: PropTypes.string.isRequired,
+  // kilometers: PropTypes.string.isRequired,
+  // color: PropTypes.string.isRequired,
+  // transmission: PropTypes.string.isRequired,
+  // nbDoors: PropTypes.string.isRequired,
+  // fuelType: PropTypes.string.isRequired,
+  // isVisible: PropTypes.bool.isRequired,
 
   formActive: PropTypes.bool,
 
-  presets: PropTypes.arrayOf(PropTypes.shape({})),
-
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-
-  spacing: PropTypes.string,
-  style: PropTypes.shape({}),
+  classes: PropTypes.shape({}),
 };
 
 /**
  * Component props default values
  */
-ManageColorPresentation.defaultProps = {
-  presets: PropTypes.arrayOf(PropTypes.shape({})),
-  spacing: '16',
+ManagePresetPresentation.defaultProps = {
+  name: '',
   formActive: true,
-  style: { // Default styles
-    container: {
-      position: 'fixed',
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      zIndex: '20',
-    },
-  },
+  classes: PropTypes.shape({}),
 };
 
 
@@ -463,7 +397,17 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: `calc(100% - ${theme.spacing.unit * 2}px)`,
   },
+  container: {
+    position: 'fixed',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: '20',
+  },
 });
 
 
-export default withStyles(styles)(ManageColorPresentation);
+export default withStyles(styles)(ManagePresetPresentation);

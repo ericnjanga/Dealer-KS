@@ -3,29 +3,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { AdminContext } from './services/services-init.js';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import logo from './logo.svg';
-import 'typeface-roboto';
-import './App.css';
-
-import AuthPortal from './components/AuthPortal/AuthPortal.js';
 import AdminPortal from './components/AdminPortal/AdminPortal.js';
-
-import Hero from './components/Hero/Hero.js';
-import MainCarousel from './components/MainCarousel/MainCarousel.js';
-
-import MenuAppBar from './components/MenuAppBar/MenuAppBar.js';
-import AppDrawer from './components/AppDrawer/AppDrawer.js';
-import Carousel from './components/Carousel/Carousel.js';
-
-
-import List from './components/List.js';
-
-
-//CarsListTing
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+
+import 'typeface-roboto';
+import './App.css';
 
 
 

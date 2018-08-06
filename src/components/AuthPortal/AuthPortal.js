@@ -2,7 +2,7 @@ import React from 'react';
 import AuthPortalPresentation from './AuthPortalPresentation.js';
 import DBUser from './../../services/DBUser.class.js';
 
-import { adminDefault } from './../../settings/dummy-data.js';
+import settings from './../../settings/basics.js';
 
 import { AdminContext } from './../../services/services-init.js';
 
@@ -90,6 +90,7 @@ class AuthPortal extends React.Component {
 
     const visitor = { ...this.state.admin };
     const env = this;
+    const { adminDefault } = settings;
 
     if (visitor.name && visitor.password) {
 
