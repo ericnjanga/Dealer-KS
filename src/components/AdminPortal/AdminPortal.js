@@ -12,11 +12,12 @@ class AdminPortal extends React.Component {
 
     super(props);
     this.state = {
-      presets: [...settings.presets],
+      // presets: [...settings.presets],
+      pageSections: [...settings.pageSections],
     };
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.handleCK1Change = this.handleCK1Change.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
 
   }
@@ -59,11 +60,12 @@ class AdminPortal extends React.Component {
      * Save a reverse list of items in the "list" property of each individual "preset" object
      * (Replace the whole "preset" object back in the state)
      */
-    const { presets } = this.state;
+    const presets = this.state.pageSections[2];
+    const { pageSections } = this.state;
 
-    for (let i = 0, l = presets.length; i < l; i += 1) {
+    for (let i = 0, l = presets.linkList.length; i < l; i += 1) {
 
-      DBItem.getNode(presets[i].name).on('value', (snapshot) => {
+      DBItem.getNode(presets.linkList[i].name).on('value', (snapshot) => {
 
         const nodeVal = snapshot.val();
         const tempsItems = [];
@@ -77,10 +79,11 @@ class AdminPortal extends React.Component {
           }); // itemsMap
         }//nodeVal
         // save array in state
-        presets[i].list = [];
+        presets.linkList[i].list = [];
         const itemsReverse = tempsItems.reverse();
-        presets[i].list = [...itemsReverse];
-        this.setState({ presets });
+        presets.linkList[i].list = [...itemsReverse];
+        pageSections.presets = presets;
+        this.setState({ pageSections });
 
       }); // [end] GET ALL Presets
 
@@ -112,22 +115,48 @@ class AdminPortal extends React.Component {
   /**
    * - Save text field changes in the state
    */
-  handleCK1Change(event) {
+  handleChange(event) {
 
-    const targetName = event.target.name;
-    const targetValue = event.target.value ==='true' ? false : true;
-    const { presets } = this.state;
+    const dataType = event.target.getAttribute('datatype').split('/');
 
-    for(let i in presets) { 
-      if (presets[i].name === targetName) {
-        presets[i].active = targetValue;
-        break;
-      }
-    } 
+    
 
-    // console.log(`${targetName} - ${targetValue}`);
- 
-    this.setState({ presets });
+    if (dataType[0] && dataType[0] === 'pageSections' && dataType.length === 1 ) {
+
+
+      console.log('>>>>>>', this.state[dataType[0]]);
+
+      // if (dataType[0] === 'pageSections') {
+
+      //   const { pageSections } = this.state;
+      //   if (dataType[1] && dataType[1] === 'presets') {
+  
+      //     const presets = pageSections[2];
+  
+      //   }
+
+      // }
+
+    }
+
+    // const targetName = event.target.name;
+    // const targetValue = event.target.value ==='true' ? false : true;
+    // const presets = this.state.pageSections[2];
+    // const { pageSections } = this.state;
+    // // const { presets } = this.state;
+
+    // for(let i in presets) { 
+    //   if (presets.linkList[i].name === targetName) {
+    //     presets.linkList[i].active = targetValue;
+    //     break;
+    //   }
+    // } 
+
+    // // console.log(`${targetName} - ${targetValue}`);
+
+    // pageSections.presets = presets;
+    // this.setState({ pageSections });
+    // // this.setState({ presets });
 
   }
 
@@ -158,7 +187,7 @@ class AdminPortal extends React.Component {
 
   componentReady() {
 
-    return this.state && this.state.items && this.state.presets;
+    return this.state && this.state.items && this.state.pageSections;
 
   }
 
@@ -202,7 +231,7 @@ class AdminPortal extends React.Component {
         {...this.state}
         handleEdit={this.handleEdit}
         handleDelete={this.handleDelete}
-        handleCK1Change={this.handleCK1Change}
+        handleChange={this.handleChange}
       />
     );
 

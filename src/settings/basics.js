@@ -7,21 +7,64 @@ const settings = {
   currency: {
     CAD_XAF: 426.07,
   },
-  presets: [
+  // presets: [
+  //   {
+  //     name: 'make',
+  //     title: 'Marque',
+  //     active: true,
+  //   },
+  //   {
+  //     name: 'bodyType',
+  //     title: 'Types de corps',
+  //     active: true,
+  //   },
+  //   {
+  //     name: 'color',
+  //     title: 'Couleurs',
+  //     active: true,
+  //   },
+  // ],
+  pageSections: [
     {
-      name: 'make',
-      title: 'Marque',
+      name: 'siteinfo',
+      title: 'Site info',
       active: true,
+      linkList: [
+        {
+          name: 'texts',
+          title: 'Texts',
+        },
+      ],
     },
     {
-      name: 'bodyType',
-      title: 'Types de corps',
+      name: 'carinventory',
+      title: 'Inventaire de voitures',
       active: true,
+      linkList: [
+        {
+          name: 'carinvent',
+          title: 'Toutes les voitures',
+        },
+      ],
     },
     {
-      name: 'color',
-      title: 'Couleurs',
+      name: 'presets',
+      title: 'Modifier les paramètres',
       active: true,
+      linkList: [
+        {
+          name: 'make',
+          title: 'Marque',
+        },
+        {
+          name: 'bodyType',
+          title: 'Types de corps',
+        },
+        {
+          name: 'color',
+          title: 'Couleurs',
+        },
+      ],
     },
   ],
   adminDefault: {

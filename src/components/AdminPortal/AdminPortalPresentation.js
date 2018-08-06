@@ -23,11 +23,11 @@ import './AdminPortalPresentation.css';
 
 const AdminPortalPresentation = ({
   items,
-  presets,
+  pageSections,
 
   handleEdit,
   handleDelete,
-  handleCK1Change,
+  handleChange,
 
   classes,
 }) => {
@@ -38,71 +38,118 @@ const AdminPortalPresentation = ({
     <section className={classes.container}>
 
       <AdminSidebar
-        presets={presets}
+        handleChange={handleChange}
+        pageSections={pageSections}
       />
 
 
       <section className={classes.maincontent}>
+        {
+          /**
+           * Site info
+           * -----------------------
+           */
+          // pageSections.siteinfo.active &&
+          <section style={{ border: '3px solid lime '}}>
+            <h2>Site info</h2>
+          </section>
+        }
 
-        <Grid
-          container
-          justify="center"
-          spacing={spacing}
-        >
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={6}
-          >
-            <TableDisplay
-              heroText="Inventaire de voiture"
-              data={items}
-              headers={['title', 'createdOn', 'color']}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={3}
-            md={3}
-          >
-            {
-              presets.map((preset) => {
 
-                return (<AdminPreset
-                  key={preset.name}
-                  {...preset}
-                  tableData={{
-                    data: preset.list,
-                    headers: ['name'],
-                    presetDelete: preset.name,
-                    handleDelete,
-                  }}
-                />);
-              })
-            }
-          </Grid>
+        {
+          /**
+           * Liste de voitures
+           * -----------------------
+           */
+          // pageSections.carlisting.active &&
+          <section style={{ border: '3px solid lime '}}>
+            <h2>Liste de voitures</h2>
+            <Grid
+              container
+              justify="center"
+              spacing={spacing}
+            >
+              <Grid
+                item
+                xs={12}
+                sm={9}
+                md={9}
+              >
+                <TableDisplay
+                  heroText="Inventaire de voiture"
+                  data={items}
+                  headers={['title', 'createdOn', 'color']}
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                />
+              </Grid>
 
-          <Grid
-            item
-            xs={12}
-            sm={3}
-            md={3}
-          >
-            <Paper className={classes.section} elevation={1}>
-              <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
-                Ajouter Une Voiture
-              </Typography>
+              <Grid
+                item
+                xs={12}
+                sm={3}
+                md={3}
+              >
+                <Paper className={classes.section} elevation={1}>
+                  <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
+                    Ajouter Une Voiture
+                  </Typography>
 
-              <ItemCreateForm
-                presets={presets}
-              />
-            </Paper>
-          </Grid>
-        </Grid>
+                  {/* <ItemCreateForm
+                    presets={pageSections[2]} */}
+                  />
+                </Paper>
+              </Grid>
+            </Grid>
+          </section>
+        }
+
+
+        {
+          /**
+           * Modifier les parametres
+           * -----------------------
+           */
+          // pageSections.presets.active &&
+          <section style={{ border: '3px solid lime '}}>
+            <h2>Modifier les parametres</h2>
+
+            <Grid
+              container
+              justify="center"
+              spacing={spacing}
+            >
+              {
+                console.log('********pageSections=', pageSections)
+                // pageSections[2].map((preset) => {
+
+                //   return (
+                //     <Grid
+                //       item
+                //       xs={12}
+                //       sm={4}
+                //       md={4}
+                //     >
+                //       <AdminPreset
+                //         key={preset.name}
+                //         {...preset}
+                //         tableData={{
+                //           data: preset.list,
+                //           headers: ['name'],
+                //           presetDelete: preset.name,
+                //           handleDelete,
+                //         }}
+                //       />
+                //     </Grid>
+                //   );
+                // })
+              }
+            </Grid>
+          </section>
+        }
+
+
+
 
 
         {/* <AppBar
@@ -124,7 +171,7 @@ const AdminPortalPresentation = ({
                         name={name}
                         value={`${active}`}
                         checked={active}
-                        onChange={handleCK1Change}
+                        onChange={handleChange}
                         color="primary"
                       />
                     }
@@ -147,11 +194,11 @@ const AdminPortalPresentation = ({
  * Component props validation
  */
 AdminPortalPresentation.propTypes = {
-  presets: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   items: PropTypes.arrayOf(PropTypes.shape({})),
+  pageSections: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   handleEdit: PropTypes.func,
   handleDelete: PropTypes.func,
-  handleCK1Change: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
 
   classes: PropTypes.shape({}),
 };
@@ -171,6 +218,7 @@ const styles = theme => ({
 
   container: {
     display: 'flex',
+    height: '100vh',
     backgroundColor: 'rgb(199, 207, 212)',
   },
   maincontent: {

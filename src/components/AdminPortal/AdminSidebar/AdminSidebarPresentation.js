@@ -4,13 +4,15 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
+import Button from '@material-ui/core/Button';
 import settings, { appText } from './../../../settings/basics.js';
 
 
 const AdminSidebarPresentation = ({
   toggle,
   active,
-  presets,
+  pageSections,
+  handleChange,
   classes,
 }) => {
 
@@ -26,32 +28,47 @@ const AdminSidebarPresentation = ({
       <div
         className={ active ? classes.containerActive : classes.containerInactive }
       >
-        <nav className={classes.sidebarnav}>
-          <h2 className={classes.sidebarnavtitle}>Site Info</h2>
-          <ul className={classes.sidebarnavlist}>
-            <li className={classes.sidebarnavitem}>Texts</li>
-          </ul>
-        </nav>
-
-        <nav className={classes.sidebarnav}>
-          <h2 className={classes.sidebarnavtitle}>Liste de voitures</h2>
-          <ul className={classes.sidebarnavlist}>
-            <li className={classes.sidebarnavitem}>Toutes les voitures</li>
-          </ul>
-        </nav>
-
-        <nav className={classes.sidebarnav}>
-          <h2 className={classes.sidebarnavtitle}>Modifier les paramètres</h2>
-          <ul className={classes.sidebarnavlist}>
-          {
-            presets.map((preset) => {
-              return (<li
-                key={preset.name}
-                className={classes.sidebarnavitem}>{preset.name}</li>)
-            })
-          }
-          </ul>
-        </nav>
+        {
+          pageSections.map((pageSection) => {
+            return (
+              <nav
+                key={pageSection.name}
+                className={classes.sidebarnav}>
+                <div>
+                  <Button
+                    className={classes.sidebarnavtitle}
+                    onClick={handleChange}
+                    datatype="pageSections"
+                  >
+                    {pageSection.title}
+                  </Button>
+                </div>
+                <ul className={classes.sidebarnavlist}>
+                  {
+                    // console.log('>>>pageSection=', pageSection)
+                    pageSection.linkList &&
+                    pageSection.linkList.map((link) => {
+                      return (
+                        <li
+                          key={link.name}
+                          className={classes.sidebarnavitem}
+                        >
+                          <Button
+                            className={classes.sidebarnavitembtn}
+                            onClick={handleChange}
+                            datatype="xxx"
+                          >
+                            {link.title}
+                          </Button>
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
+              </nav>
+            )
+          })
+        }
       </div>
     </div>
   );
@@ -65,8 +82,9 @@ const AdminSidebarPresentation = ({
 AdminSidebarPresentation.propTypes = {
   toggle: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
-  presets: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  pageSections: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 
+  handleChange: PropTypes.func.isRequired,
   classes: PropTypes.shape({}),
 };
 
@@ -111,10 +129,14 @@ const styles = theme => ({
   },
   sidebarnavtitle: {
     color: '#1DB2D4',
-    // border: '2px solid lime',
+    // borderBottom: '2px solid lime',
     marginBottom: '5px',
     textTransform: 'uppercase',
     fontSize: '18px',
+    width: '100%',
+    justifyContent: 'left',
+    textAlign: 'left',
+    paddingLeft: '0',
   },
   sidebarnavlist: {
     listStyleType: 'none',
@@ -127,6 +149,11 @@ const styles = theme => ({
     fontSize: '18px',
     color: '#fff',
     // border: '2px solid lime',
+  },
+  sidebarnavitembtn: {
+    color: '#fff',
+    width: '100%',
+    justifyContent: 'left',
   },
 
   heroRoot: {
