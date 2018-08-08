@@ -29,42 +29,46 @@ const AdminSidebarPresentation = ({
         className={ active ? classes.containerActive : classes.containerInactive }
       >
         {
-          pageSections.map((pageSection) => {
+          pageSections.map(({ name, title, active, linkList }) => {
             return (
               <nav
-                key={pageSection.name}
-                className={classes.sidebarnav}>
+                key={name}
+                className={classes.sidebarnav}
+              >
                 <div>
                   <Button
                     className={classes.sidebarnavtitle}
-                    onClick={handleChange}
-                    datatype="pageSections"
+                    onClick={(event) => handleChange('pageSections', name)}
                   >
-                    {pageSection.title}
+                    {title}
                   </Button>
                 </div>
-                <ul className={classes.sidebarnavlist}>
-                  {
-                    // console.log('>>>pageSection=', pageSection)
-                    pageSection.linkList &&
-                    pageSection.linkList.map((link) => {
-                      return (
-                        <li
-                          key={link.name}
-                          className={classes.sidebarnavitem}
-                        >
-                          <Button
-                            className={classes.sidebarnavitembtn}
-                            onClick={handleChange}
-                            datatype="xxx"
+
+                {
+                  active &&
+                  <ul className={classes.sidebarnavlist}>
+                    {
+                      // console.log('>>>pageSection=', pageSection)
+                      linkList &&
+                      linkList.map((link) => {
+                        return (
+                          <li
+                            key={link.name}
+                            className={classes.sidebarnavitem}
                           >
-                            {link.title}
-                          </Button>
-                        </li>
-                      )
-                    })
-                  }
-                </ul>
+                            <Button
+                              className={classes.sidebarnavitembtn}
+                              // onClick={handleChange}
+                              datatype="xxx"
+                            >
+                              {link.title}
+                            </Button>
+                          </li>
+                        )
+                      })
+                    }
+                  </ul>
+                }
               </nav>
             )
           })
@@ -124,7 +128,6 @@ const styles = theme => ({
   },
 
   sidebarnav: {
-    marginBottom: '30px',
     // border: '2px solid lime',
   },
   sidebarnavtitle: {
@@ -139,6 +142,7 @@ const styles = theme => ({
     paddingLeft: '0',
   },
   sidebarnavlist: {
+    marginBottom: '30px',
     listStyleType: 'none',
     marginTop: '0',
     paddingLeft: '0',

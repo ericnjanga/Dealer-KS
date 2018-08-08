@@ -21,6 +21,32 @@ import AdminSidebar from './AdminSidebar/AdminSidebar.js';
 
 import './AdminPortalPresentation.css';
 
+
+const PageSectionPresentation = ({
+  name,
+  title,
+  active,
+  linkList
+}) => {
+
+  if(! active) {
+    return false;
+  }
+
+  const root = {
+    display: 'flex',
+    padding: '30px',
+    height: '100vh',
+    overflowY: 'scroll',
+  };
+
+  return (
+    <section style={root}>
+      <h2>{ title }</h2>
+    </section>
+  );
+}
+
 const AdminPortalPresentation = ({
   items,
   pageSections,
@@ -45,14 +71,12 @@ const AdminPortalPresentation = ({
 
       <section className={classes.maincontent}>
         {
-          /**
-           * Site info
-           * -----------------------
-           */
-          // pageSections.siteinfo.active &&
-          <section style={{ border: '3px solid lime '}}>
-            <h2>Site info</h2>
-          </section>
+          pageSections.map((pageSection) =>
+            <PageSectionPresentation
+              key={pageSection.name}
+              {...pageSection}
+            />
+          )
         }
 
 
@@ -62,46 +86,47 @@ const AdminPortalPresentation = ({
            * -----------------------
            */
           // pageSections.carlisting.active &&
-          <section style={{ border: '3px solid lime '}}>
-            <h2>Liste de voitures</h2>
-            <Grid
-              container
-              justify="center"
-              spacing={spacing}
-            >
-              <Grid
-                item
-                xs={12}
-                sm={9}
-                md={9}
-              >
-                <TableDisplay
-                  heroText="Inventaire de voiture"
-                  data={items}
-                  headers={['title', 'createdOn', 'color']}
-                  handleEdit={handleEdit}
-                  handleDelete={handleDelete}
-                />
-              </Grid>
+          // <section style={{ border: '3px solid lime '}}>
+          //   <h2>Liste de voitures</h2>
+          //   <Grid
+          //     container
+          //     justify="center"
+          //     spacing={spacing}
+          //   >
+          //     <Grid
+          //       item
+          //       xs={12}
+          //       sm={9}
+          //       md={9}
+          //     >
+          //       <TableDisplay
+          //         heroText="Inventaire de voiture"
+          //         data={items}
+          //         headers={['title', 'createdOn', 'color']}
+          //         handleEdit={handleEdit}
+          //         handleDelete={handleDelete}
+          //       />
+          //     </Grid>
 
-              <Grid
-                item
-                xs={12}
-                sm={3}
-                md={3}
-              >
-                <Paper className={classes.section} elevation={1}>
-                  <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
-                    Ajouter Une Voiture
-                  </Typography>
+          //     <Grid
+          //       item
+          //       xs={12}
+          //       sm={3}
+          //       md={3}
+          //     >
+          //       <Paper className={classes.section} elevation={1}>
+          //         <Typography variant="headline" component="h3" style={{ marginBottom: '20px' }}>
+          //           Ajouter Une Voiture
+          //         </Typography>
 
-                  {/* <ItemCreateForm
-                    presets={pageSections[2]} */}
-                  />
-                </Paper>
-              </Grid>
-            </Grid>
-          </section>
+          //         {/* <ItemCreateForm
+          //           presets={pageSections[2]}
+          //         />
+          //          */}
+          //       </Paper>
+          //     </Grid>
+          //   </Grid>
+          // </section>
         }
 
 
@@ -111,41 +136,41 @@ const AdminPortalPresentation = ({
            * -----------------------
            */
           // pageSections.presets.active &&
-          <section style={{ border: '3px solid lime '}}>
-            <h2>Modifier les parametres</h2>
+          // <section style={{ border: '3px solid lime '}}>
+          //   <h2>Modifier les parametres</h2>
 
-            <Grid
-              container
-              justify="center"
-              spacing={spacing}
-            >
-              {
-                console.log('********pageSections=', pageSections)
-                // pageSections[2].map((preset) => {
+          //   <Grid
+          //     container
+          //     justify="center"
+          //     spacing={spacing}
+          //   >
+          //     {
+          //       console.log('********pageSections=', pageSections)
+          //       pageSections[2].map((preset) => {
 
-                //   return (
-                //     <Grid
-                //       item
-                //       xs={12}
-                //       sm={4}
-                //       md={4}
-                //     >
-                //       <AdminPreset
-                //         key={preset.name}
-                //         {...preset}
-                //         tableData={{
-                //           data: preset.list,
-                //           headers: ['name'],
-                //           presetDelete: preset.name,
-                //           handleDelete,
-                //         }}
-                //       />
-                //     </Grid>
-                //   );
-                // })
-              }
-            </Grid>
-          </section>
+          //         return (
+          //           <Grid
+          //             item
+          //             xs={12}
+          //             sm={4}
+          //             md={4}
+          //           >
+          //             <AdminPreset
+          //               key={preset.name}
+          //               {...preset}
+          //               tableData={{
+          //                 data: preset.list,
+          //                 headers: ['name'],
+          //                 presetDelete: preset.name,
+          //                 handleDelete,
+          //               }}
+          //             />
+          //           </Grid>
+          //         );
+          //       })
+          //     }
+          //   </Grid>
+          // </section>
         }
 
 
@@ -222,7 +247,6 @@ const styles = theme => ({
     backgroundColor: 'rgb(199, 207, 212)',
   },
   maincontent: {
-    padding: '30px',
     width: '100%',
     backgroundColor: 'rgb(199, 207, 212)',
   },

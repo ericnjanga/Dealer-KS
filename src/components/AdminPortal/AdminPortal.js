@@ -115,29 +115,56 @@ class AdminPortal extends React.Component {
   /**
    * - Save text field changes in the state
    */
-  handleChange(event) {
+  handleChange(root, targetName) {
 
-    const dataType = event.target.getAttribute('datatype').split('/');
+    if (root && root === 'pageSections' && targetName) {
+
+
+    // console.log('1>>>>>>', root);
+    // console.log('1>>>>>>', targetName);
+
+      const { pageSections } = this.state;
+      for (let i = 0, l = pageSections.length; i < l; i += 1) {
+
+        if (pageSections[i].name !== targetName) {
+
+          pageSections[i].active = false;
+          console.log('1>>>>>>', pageSections[i]);
+
+        } else {
+
+          pageSections[i].active = true;
+          console.log('2>>>>>>', pageSections[i]);
+
+        }
+
+      }
+
+      this.setState({ pageSections });
+
+    }
+
+    // const dataType = event.target.getAttribute('datatype').split('/');
 
     
 
-    if (dataType[0] && dataType[0] === 'pageSections' && dataType.length === 1 ) {
+    // if (dataType[0] && dataType[0] === 'pageSections' && dataType.length === 1 ) {
 
 
-      console.log('>>>>>>', this.state[dataType[0]]);
+    //   console.log('>>>>>>', this.state[dataType[0]]);
 
-      // if (dataType[0] === 'pageSections') {
+    //   // if (dataType[0] === 'pageSections') {
 
-      //   const { pageSections } = this.state;
-      //   if (dataType[1] && dataType[1] === 'presets') {
+    //   //   const { pageSections } = this.state;
+    //   //   if (dataType[1] && dataType[1] === 'presets') {
   
-      //     const presets = pageSections[2];
+    //   //     const presets = pageSections[2];
   
-      //   }
+    //   //   }
 
-      // }
+    //   // }
 
-    }
+    // }
 
     // const targetName = event.target.name;
     // const targetValue = event.target.value ==='true' ? false : true;

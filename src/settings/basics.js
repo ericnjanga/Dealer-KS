@@ -39,7 +39,7 @@ const settings = {
     {
       name: 'carinventory',
       title: 'Inventaire de voitures',
-      active: true,
+      active: false,
       linkList: [
         {
           name: 'carinvent',
@@ -50,7 +50,7 @@ const settings = {
     {
       name: 'presets',
       title: 'Modifier les paramètres',
-      active: true,
+      active: false,
       linkList: [
         {
           name: 'make',
