@@ -105,7 +105,7 @@ const styles = theme => ({
   rootActive: {
     width: '400px',
     textAlign: 'left',
-    padding: '30px',
+    // padding: '30px',
     backgroundColor: '#520000',
     transition: 'all 0.5s',
   },
@@ -132,14 +132,15 @@ const styles = theme => ({
   },
   sidebarnavtitle: {
     color: '#1DB2D4',
-    // borderBottom: '2px solid lime',
+    // borderBottom: '1px solid lime',
+    paddingLeft: '30px',
+    paddingRight: '30px',
     marginBottom: '5px',
     textTransform: 'uppercase',
     fontSize: '18px',
     width: '100%',
     justifyContent: 'left',
     textAlign: 'left',
-    paddingLeft: '0',
   },
   sidebarnavlist: {
     marginBottom: '30px',
@@ -158,6 +159,8 @@ const styles = theme => ({
     color: '#fff',
     width: '100%',
     justifyContent: 'left',
+    paddingLeft: '50px',
+    paddingRight: '50px',
   },
 
   heroRoot: {
