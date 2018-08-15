@@ -31,8 +31,13 @@ const settings = {
       active: true,
       linkList: [
         {
-          name: 'texts',
-          title: 'Texts',
+          name: 'admin',
+          title: 'Admin',
+          active: true,
+        },
+        {
+          name: 'infos',
+          title: 'Infos',
         },
       ],
     },

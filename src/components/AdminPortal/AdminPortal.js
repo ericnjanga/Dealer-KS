@@ -13,7 +13,7 @@ class AdminPortal extends React.Component {
     super(props);
     this.state = {
       // presets: [...settings.presets],
-      pageSections: [...settings.pageSections],
+      pageSections: [...settings.pageSections]
     };
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -108,82 +108,119 @@ class AdminPortal extends React.Component {
 
   }
 
+  // pure function athat get a source, gets its copy, look over it
+  // activate corresponding item, deactivate the rest of items
+  activateSource(source, item) {
 
-
-
+  }
 
   /**
-   * - Save text field changes in the state
+   * - Multi function method
    */
-  handleChange(root, targetName) {
+  handleChange({ action, dir, isSublink, root, targetName, parent }) {
 
-    if (root && root === 'pageSections' && targetName) {
+    // console.log('>>>parent=', parent);
+    console.log('>>>action, dir=', action, dir, targetName);
+
+    // activate/deactivate page links
+    if (action === 'activate') {
+
+      const { state } = this;
+      const root = state[dir[0]];
 
 
-    // console.log('1>>>>>>', root);
-    // console.log('1>>>>>>', targetName);
 
-      const { pageSections } = this.state;
-      for (let i = 0, l = pageSections.length; i < l; i += 1) {
+      //--- each time user clicks,
+      // find a way to provide the right source
+      // to this function
+      activateSource();
 
-        if (pageSections[i].name !== targetName) {
+      // update state with what that function returns
 
-          pageSections[i].active = false;
-          console.log('1>>>>>>', pageSections[i]);
+     
 
-        } else {
+        // for (let i = 0, l = root.length; i < l; i += 1) {
+        //   if (root[i].name !== targetName) {
+        //     root[i].active = false;
 
-          pageSections[i].active = true;
-          console.log('2>>>>>>', pageSections[i]);
+        //     if(isSublink) {
+        //       let subRoot = root[i].linkList
+        //       for (let j = 0, k = subRoot.length; j < k; j += 1) {
+        //         if (subRoot[j].name !== targetName) {
+        //           subRoot[j].active = false;  
+        //         } else {
+        //           subRoot[j].active = true;
+        //         }
+        //       }
 
-        }
+        //     }
 
-      }
+        //   } else {
+        //     root[i].active = true;
+        //   }
+        // }
 
-      this.setState({ pageSections });
+      // } 
+      
+      // else {
 
+      //   console.log('>>>>sublinkRoot', state.sublinkRoot);
+
+      //   for(let j = 0, l = state.sublinkRoot.length; j < l; j += 1) {
+
+      //   }
+
+      // }
+      
+
+      console.log(state[dir[0]]);
+
+      this.setState({ [dir[0]]:root });
+  
     }
 
-    // const dataType = event.target.getAttribute('datatype').split('/');
+    /*
+    if(root && root === 'pageSections') {
+
+      if (targetName) {
+
+
+      // console.log('1>>>>>>', root);
+      // console.log('1>>>>>>', targetName);
+  
+        const { pageSections } = this.state;
+        for (let i = 0, l = pageSections.length; i < l; i += 1) {
+  
+          if (pageSections[i].name !== targetName) {
+  
+            pageSections[i].active = false; // deactivate
+            // console.log('1>>>>>>', pageSections[i]);
+  
+          } else {
+  
+            pageSections[i].active = true; // activate
+            // console.log('2>>>>>>', pageSections[i]);
+  
+          }
+  
+        }
+  
+        this.setState({ pageSections });
+  
+      }
+
+    }
+    */
 
     
 
-    // if (dataType[0] && dataType[0] === 'pageSections' && dataType.length === 1 ) {
 
 
-    //   console.log('>>>>>>', this.state[dataType[0]]);
+    if (parent && parent== root && root === 'linkList' && targetName) {
 
-    //   // if (dataType[0] === 'pageSections') {
+    }
 
-    //   //   const { pageSections } = this.state;
-    //   //   if (dataType[1] && dataType[1] === 'presets') {
-  
-    //   //     const presets = pageSections[2];
-  
-    //   //   }
 
-    //   // }
-
-    // }
-
-    // const targetName = event.target.name;
-    // const targetValue = event.target.value ==='true' ? false : true;
-    // const presets = this.state.pageSections[2];
-    // const { pageSections } = this.state;
-    // // const { presets } = this.state;
-
-    // for(let i in presets) { 
-    //   if (presets.linkList[i].name === targetName) {
-    //     presets.linkList[i].active = targetValue;
-    //     break;
-    //   }
-    // } 
-
-    // // console.log(`${targetName} - ${targetValue}`);
-
-    // pageSections.presets = presets;
-    // this.setState({ pageSections });
-    // // this.setState({ presets });
 
   }
 

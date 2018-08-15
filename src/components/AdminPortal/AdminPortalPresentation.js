@@ -19,6 +19,8 @@ import TableDisplay from './../TableDisplay/TableDisplay.js';
 import AdminPreset from './AdminPreset.js';
 import AdminSidebar from './AdminSidebar/AdminSidebar.js';
 
+import { AdminForms } from './forms/Formsiteinfo.js';
+
 import './AdminPortalPresentation.css';
 
 
@@ -35,17 +37,34 @@ const PageSectionPresentation = ({
 
   const root = {
     display: 'flex',
+    flexDirection: 'column',
     padding: '30px',
     height: '100vh',
     overflowY: 'scroll',
   };
 
+  // const Comp = 'Formsiteinfo';
+
   return (
     <section style={root}>
-      <h2>{ title }</h2>
+      <h2>...{ title }</h2>
+      {
+        linkList.map(link=>
+          <AdminForms
+            key={link.name}
+            {...link} />
+        )
+        // name === 'siteinfo' &&
+        // <div>
+        //   <FormAdminInfo />
+        //   <FormSiteInfo />
+        // </div>
+      }
     </section>
   );
 }
+
+
 
 const AdminPortalPresentation = ({
   items,

@@ -38,7 +38,7 @@ const AdminSidebarPresentation = ({
                 <div>
                   <Button
                     className={classes.sidebarnavtitle}
-                    onClick={(event) => handleChange('pageSections', name)}
+                    onClick={(event) => handleChange({ action:'activate', dir:['pageSections'],  root:'pageSections', targetName: name})}
                   >
                     {title}
                   </Button>
@@ -58,7 +58,7 @@ const AdminSidebarPresentation = ({
                           >
                             <Button
                               className={classes.sidebarnavitembtn}
-                              // onClick={handleChange}
+                              onClick={(event) => handleChange({ action:'activate', dir:['pageSections', name], isSublink:true, targetName: link.name, parent: name })}
                               datatype="xxx"
                             >
                               {link.title}
@@ -166,6 +166,7 @@ const styles = theme => ({
   heroRoot: {
     position: 'relative',
     display: 'flex',
+    padding: '30px',
   },
   herotitleActive: {
     opacity: '1',
